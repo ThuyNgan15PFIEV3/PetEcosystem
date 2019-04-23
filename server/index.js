@@ -23,6 +23,33 @@ FS.readdirSync(routePath).forEach((file) => {
     require(`${routePath}${file}`)(app);
 });
 
+// Configuring the database
+const dbConfig = require('./config/database.config.js');
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+
+// Connecting to the database
+mongoose.connect(dbConfig.url, {
+    useNewUrlParser: true
+}).then(() => {
+    console.log("Successfully connected to the database");    
+}).catch(err => {
+    console.log('Could not connect to the database. Exiting now...', err);
+    process.exit();
+});
+
+// Require Notes routes
+require('./routes/product.routes.js')(app);
+
+
 Http.createServer(app).listen(3030, () => {
     console.log(`App listening on 3030!`);
 });
+
+app.get('/', (req, res) => {
+    res.json({"message": "Welcome to our API",
+                "Product": "/products"
+    });
+});
+
