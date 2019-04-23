@@ -49,7 +49,7 @@ Http.createServer(app).listen(3030, () => {
 
 app.get('/', (req, res) => {
     res.json({"message": "Welcome to our API",
-                "Product": "/products"
+                "product": "/products"
     });
 });
 
