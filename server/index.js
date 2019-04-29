@@ -39,9 +39,6 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
-// Require Notes routes
-require('./routes/product.routes.js')(app);
-
 
 Http.createServer(app).listen(3030, () => {
     console.log(`App listening on 3030!`);

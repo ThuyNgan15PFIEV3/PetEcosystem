@@ -1,9 +1,12 @@
 module.exports = (app) => {
-  const products = require('../controllers/product.controllers.js');
-
-  app.post('/products',products.create);
-  app.get('/products',products.findAll);
-  app.get('/products/:productId', products.findOne);
-  app.put('/products/:productId', products.update);
-  app.delete('/products/:productId', products.delete);
+  const productController = require('../controllers/product.controllers.js');
+  app
+    .route('/products')
+    .get(productController.findAll)
+    .post(productController.create);
+  app
+    .route('/products/:productId')
+    .get(productController.findOne)
+    .put(productController.update)
+    .delete(productController.delete);
 }
