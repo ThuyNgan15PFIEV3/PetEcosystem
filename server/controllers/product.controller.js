@@ -78,28 +78,11 @@ exports.update = async (req, res) => {
       data: product
     });
   } catch (err) {
-
+    return res.status(500).send({
+      message:
+        err.message || "Some error occurred while updating the Product."
+    });
   }
-  Product.findById(req.params.productId)
-    .then(product => {
-      if (req.body._id) {
-        delete req.body._id;
-      }
-
-      Object.entries(req.body).forEach((item) => {
-        const key = item[0];
-        const value = item[1];
-        product[key] = value;
-      });
-      product.save();
-      res.send(product);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while updating the Product."
-      });
-    });;
 }
 
 exports.delete = async (req, res) => {

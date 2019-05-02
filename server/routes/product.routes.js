@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  const productController = require('../controllers/product.controllers.js');
+  const productController = require('../controllers/product.controller.js');
   app
     .route('/products')
     .get(productController.findAll)
