@@ -7,6 +7,17 @@ import FS from 'fs-extra';
 import Http from 'http';
 import Path from 'path';
 
+// Configuring the database
+const dbConfig = require('./config/database.config.js');
+const mongoose = require('mongoose');
+
+//import model
+require('./models/product.model');
+require('./models/store.model');
+require('./models/category.model');
+require('./models/comment.model');
+
+
 const app = Express();
 global.__rootDir = __dirname.replace('/server', '');
 
@@ -23,9 +34,8 @@ FS.readdirSync(routePath).forEach((file) => {
     require(`${routePath}${file}`)(app);
 });
 
-// Configuring the database
-const dbConfig = require('./config/database.config.js');
-const mongoose = require('mongoose');
+
+
 
 mongoose.Promise = global.Promise;
 
@@ -45,8 +55,11 @@ Http.createServer(app).listen(3030, () => {
 });
 
 app.get('/', (req, res) => {
-    res.json({"message": "Welcome to our API",
-                "product": "/products"
+    res.json({
+        message: "Welcome to my API",
+        product: "/product",
+        store: "/store",
+        category: "/category"
     });
 });
 
