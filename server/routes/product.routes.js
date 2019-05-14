@@ -9,4 +9,14 @@ module.exports = (app) => {
     .get(productController.findOne)
     .put(productController.update)
     .delete(productController.delete);
+
+  app
+    .route('/products/:productId/comment')
+    .get(productController.getAllComment)
+    .post(productController.addComment);
+
+  app
+    .route('/products/:productId/category')
+    .post(productController.addCategoryToProduct)
+    .delete(productController.deleteCategoryOfProduct);
 }

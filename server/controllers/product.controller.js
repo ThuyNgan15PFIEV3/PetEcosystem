@@ -1,5 +1,7 @@
-const Product = require("../models/product.model.js");
-
+const mongoose = require('mongoose');
+const Product = mongoose.model('Product');
+const Category = mongoose.model('Category');
+const Comment = mongoose.model('Comment');
 exports.create = async (req, res) => {
   try {
     if (!req.body) {
@@ -63,20 +65,17 @@ exports.findOne = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.productId);
-    if (req.body._id) {
-      delete req.body._id;
-    }
-    Object.entries(req.body).forEach((item) => {
-      const key = item[0];
-      const value = item[1];
-      product[key] = value;
-    });
-    await product.save();
-    return res.status(200).json({
-      success: true,
-      data: product
-    });
+    const product = req.params.productId;
+    await Product.findOneAndUpdate(product, req.body, { new: true }, (err, data) => {
+      if (err) return res.status(400).json({
+        success: false,
+        error: err.message
+      });
+      return res.status(200).json({
+        success: true,
+        data: data
+      });
+    })
   } catch (err) {
     return res.status(500).send({
       message:
@@ -103,3 +102,82 @@ exports.delete = async (req, res) => {
     });
   }
 };
+
+exports.addCategoryToProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.productId);
+    const category = await Category.findById(req.body._id);
+    if (product.categories.indexOf(category._id) === -1) {
+      product.categories.push(category._id);
+    } else {
+      return res.json({
+        success: false,
+        data: "Already have this category"
+      })
+    }
+    product.save();
+    return res.status(200).json({
+      success: true,
+      data: product
+    })
+  } catch (err) {
+    return res.status(500).send({
+      message:
+        err.message || "Some error occurred while add category to the Product."
+    });
+  }
+}
+
+exports.deleteCategoryOfProduct = async (req, res) => {
+  try {
+    console.log(req.body);
+    const product = await Product.findById(req.params.productId);
+    const category = await Category.findById(req.body._id);
+    product.categories.splice(product.categories.indexOf(category._id), 1);
+    product.save();
+    return res.status(200).json({
+      success: true,
+      data: product
+    })
+  } catch (err) {
+    return res.status(500).send({
+      message:
+        err.message || "Some error occurred while add category to the Product."
+    });
+  }
+}
+
+exports.addComment = async (req, res) => {
+  try {
+    const comment = await new Comment(req.body);
+    await comment.save();
+    const product = await Product.findById(req.params.productId);
+    product.comments.push(comment._id);
+    product.save();
+    return res.status(200).json({
+      success: true,
+      data: product,
+      belongToProduct: req.params.productId
+    })
+  } catch (err) {
+    return res.status(500).send({
+      message:
+        err.message || "Some error occurred while add comment to the Product."
+    });
+  }
+}
+
+exports.getAllComment = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.productId).populate('comments');
+    return res.status(200).json({
+      success: true,
+      data: product
+    })
+  } catch (err) {
+    return res.status(500).send({
+      message:
+        err.message || "Some error occurred while add comment to the Product."
+    });
+  }
+}

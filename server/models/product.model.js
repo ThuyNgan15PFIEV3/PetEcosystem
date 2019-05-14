@@ -1,12 +1,29 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const ProductSchema = mongoose.Schema({
-  name: String,
-  detail: String,
-  price: String,
-  image: String,
-  store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' }
-}, {
+  name: {
+    type: String,
+    require
+  },
+  detail: {
+    type: String,
+    require
+  },
+  price: {
+    type: String,
+    require
+  },
+  image: {
+    type: String,
+    require
+  },
+  categories:
+    [{ type: Schema.Types.ObjectId, ref: 'Category', unique: true }],
+  comments:
+    [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
+},
+  {
     timestamps: true
   });
 
