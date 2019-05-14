@@ -7,6 +7,17 @@ import FS from 'fs-extra';
 import Http from 'http';
 import Path from 'path';
 
+// Configuring the database
+const dbConfig = require('./config/database.config.js');
+const mongoose = require('mongoose');
+
+//import model
+require('./models/product.model');
+require('./models/store.model');
+require('./models/category.model');
+require('./models/comment.model');
+
+
 const app = Express();
 global.__rootDir = __dirname.replace('/server', '');
 
@@ -23,6 +34,32 @@ FS.readdirSync(routePath).forEach((file) => {
     require(`${routePath}${file}`)(app);
 });
 
+
+
+
+mongoose.Promise = global.Promise;
+
+// Connecting to the database
+mongoose.connect(dbConfig.url, {
+    useNewUrlParser: true
+}).then(() => {
+    console.log("Successfully connected to the database");    
+}).catch(err => {
+    console.log('Could not connect to the database. Exiting now...', err);
+    process.exit();
+});
+
+
 Http.createServer(app).listen(3030, () => {
     console.log(`App listening on 3030!`);
 });
+
+app.get('/', (req, res) => {
+    res.json({
+        message: "Welcome to my API",
+        product: "/product",
+        store: "/store",
+        category: "/category"
+    });
+});
+
