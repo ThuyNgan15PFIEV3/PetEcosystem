@@ -1,13 +1,27 @@
 const mongoose = require('mongoose');
-
-const StoreSchema = mongoose.Schema({
-  name: String,
-  address: String,
-  description: String,
+const Schema = mongoose.Schema;
+const StoreSchema = Schema({
+  name: {
+    type: String,
+    require: true
+  },
+  address: {
+    type: String,
+    require: true
+  },
+  description: {
+    type: String,
+    require: true,
+  },
   linkFB: String,
   image: String,
-  products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
-}, {
+  belongToUser: { type: Schema.Types.ObjectId, ref: 'User' },
+  products:
+    [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+  comments:
+    [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
+},
+  {
     timestaps: true
   });
 
