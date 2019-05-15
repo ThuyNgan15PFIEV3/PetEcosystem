@@ -13,9 +13,9 @@ function App() {
     <div className="Text">
       <TopMenu/>
       <Header/>
-      <Shop/>
+      {/* <Shop/>
       <Feed/>
-      <About/>
+      <About/> */}
     </div>
   );
 }
