@@ -33,7 +33,7 @@ exports.findAll = async (req, res) => {
   } catch (err) {
     return res.status(500).send({
       message:
-        err.message || "Some error occurred while creating the Product."
+        err.message || "Some error occurred while finding the Product."
     });
   };
 };
@@ -180,4 +180,19 @@ exports.getAllComment = async (req, res) => {
         err.message || "Some error occurred while add comment to the Product."
     });
   }
+}
+
+exports.findProductByCategory = async (req, res) => {
+  try {
+    const products = await Product.find({ categories: req.params.categoryId });
+    return res.status(200).json({
+      success: true,
+      data: products
+    });
+  } catch (err) {
+    return res.status(500).send({
+      message:
+        err.message || "Some error occurred while finding the Product."
+    });
+  };
 }

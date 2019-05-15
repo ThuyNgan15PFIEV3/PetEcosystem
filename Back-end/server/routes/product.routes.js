@@ -19,4 +19,7 @@ module.exports = (app) => {
     .route('/products/:productId/category')
     .post(productController.addCategoryToProduct)
     .delete(productController.deleteCategoryOfProduct);
+  app
+    .route('/products/category/:categoryId')
+    .get(productController.findProductByCategory);
 }
