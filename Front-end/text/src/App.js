@@ -1,31 +1,37 @@
 import React from 'react';
-// import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg';
 import { BrowserRouter, Route } from 'react-router-dom';
-import TopMenu from './Component/Topmenu/TopMenu';
-import Header from './Component/Header/Header';
-import Shop from './Component/Section/Shop';
-import Feed from './Component/Section/Feed';
-import About from './Component/Section/About';
+import Navbar from './Components/Navbar';
+import Home from './Components/Section/Home';
+import Shop from './Components/Section/Shop';
+import Services from './Components/Section/Services';
+import SingleBlog from './Components/SingleComponent/SingleBlog';
+import SingleProduct from './Components/SingleComponent/SingleProduct';
 
+import Blog from './Components/Section/Blog';
+import Footer from './Components/Footer';
+
+
+import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="Text">
-        <TopMenu />
-        <Header />
-        <div>
-          <Route exact path="/" component={Shop} />
-          <Route exac path="/Feed" component={Feed} />
-          <Route exac path="/About" component={About} />
-        </div>
-        {/* <Shop />
-        <Feed />
-        <About /> */}
-      </div>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+      <Navbar/>
+      <div>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/shop" component={Shop}/>
+        <Route exact path="/services" component={Services}/>
+        <Route exact path="/blog" component={Blog}/>
+        <Route path="/blog/:blogId" component={SingleBlog}/>
+        <Route path="/shop/:productId" component={SingleProduct}/>
 
+      </div>
+      <Footer/>
+
+      </BrowserRouter>
+    </div>
   );
 }
 
