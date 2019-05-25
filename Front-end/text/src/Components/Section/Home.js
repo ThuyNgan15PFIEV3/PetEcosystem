@@ -13,35 +13,35 @@ export default class Home extends Component {
                 for pet shops &amp; </span>
                 <span>veternary owners</span>
               </h1>
-              <a className="btn btn-primary btn-lg" href="/shop" role="button">shop now</a>
+              <a className="btn btn-primary btn-lg" href="shop.html" role="button">shop now</a>
             </div>
             {/* Row */}
             <div className="row" data-aos="fade-up" data-aos-easing="linear" data-aos-duration={500}>
               {/* 1st col */}
               <div className="col-xs-12 col-md-4 col">
-                <a href="product_single.html"><figure className="pete-1" /></a>
+                <a href="/stores/training"><figure className="pete-1" /></a>
                 <div className="inner-content">
-                  <h2><a href="services.html">Pet Service</a></h2>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1500s.</p>
-                  <p><a href="services.html">readmore...</a></p>
+                  <h2><a href="/stores/training">Pet Training</a></h2>
+                  <p>Các trung tâm huấn luyện thú cưng</p>
+                  <p><a href="/stores/training">readmore...</a></p>
                 </div>
               </div>
               {/* 2st col */}
               <div className="col-xs-12 col-md-4 col">
-                <a href="product_single.html"><figure className="pete-2" /></a>
+                <a href="/stores/beauty"><figure className="pete-2" /></a>
                 <div className="inner-content">
-                  <h2><a href="services.html">Puppy Care</a></h2>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1500s.</p>
-                  <p><a href="services.html">readmore...</a></p>
+                  <h2><a href="/stores/beauty">PetBeauty</a></h2>
+                  <p>Các trung tâm làm đẹp cho thú cưng của bạn</p>
+                  <p><a href="/stores/beauty">readmore...</a></p>
                 </div>
               </div>
               {/* 3st col */}
               <div className="col-xs-12 col-md-4 col">
-                <a href="product_single.html"><figure className="pete-3" /></a>
+                <a href="/stores/normal"><figure className="pete-3" /></a>
                 <div className="inner-content">
-                  <h2><a href="services.html">Shopping</a></h2>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1500s.</p>
-                  <p><a href="services.html">readmore...</a></p>
+                  <h2><a href="/stores/normal">Shopping</a></h2>
+                  <p>Các cửa hàng bán thú cưng</p>
+                  <p><a href="/stores/normal">readmore...</a></p>
                 </div>
               </div>
             </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Comments from './Comments';
 export default class Navbar extends Component {
   render() {
     return (
@@ -95,8 +94,7 @@ export default class Navbar extends Component {
             </div>
           </div>
         </section>
-        <Comments/>
-      {/* Blog-single Section End */}
+        {/* Blog-single Section End */}
         {/* Product Section Start */}
         <section id="product" className="product">
           <div className="container">

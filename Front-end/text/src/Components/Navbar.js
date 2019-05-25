@@ -25,7 +25,7 @@ export default class Navbar extends Component {
                   <li><a href="/"><i className="fa fa-home" aria-hidden="true" /> <span className="sr-only">(current)</span></a></li>
                   <li><a href="/about">About </a></li>
                   <li><a href="/shop">Shop </a></li>
-                  <li><a href="/services">Services </a></li>
+                  <li><a href="/stores">stores </a></li>
                   <li><a href="/blog">Blog </a></li>
                   <li><a href="/login">Login </a></li>
                 </ul>
