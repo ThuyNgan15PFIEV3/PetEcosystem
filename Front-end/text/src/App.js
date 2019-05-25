@@ -10,6 +10,8 @@ import SingleProduct from './Components/SingleComponent/SingleProduct';
 
 import Blog from './Components/Section/Blog';
 import Footer from './Components/Footer';
+import Login from './Components/Section/Login';
+import Signup from './Components/Section/Signup';
 
 
 import './App.css';
@@ -18,17 +20,20 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-      <Navbar/>
-      <div>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/shop" component={Shop}/>
-        <Route exact path="/services" component={Services}/>
-        <Route exact path="/blog" component={Blog}/>
-        <Route path="/blog/:blogId" component={SingleBlog}/>
-        <Route path="/shop/:productId" component={SingleProduct}/>
+        <Navbar />
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/shop" component={Shop} />
+          <Route exact path="/services" component={Services} />
+          <Route exact path="/blog" component={Blog} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
 
-      </div>
-      <Footer/>
+          <Route path="/blog/:blogId" component={SingleBlog} />
+          <Route path="/shop/:productId" component={SingleProduct} />
+
+        </div>
+        <Footer />
 
       </BrowserRouter>
     </div>

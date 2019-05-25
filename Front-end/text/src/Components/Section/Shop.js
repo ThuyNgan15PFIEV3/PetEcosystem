@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../../CSS/Shop.css';
 export default class Footer extends Component {
   render() {
     return (
@@ -17,6 +17,81 @@ export default class Footer extends Component {
         <section id="product">
           <div className="container">
             <div className="inner-content">
+              <div class="filters__outer">
+
+                <div class="filters__inner">
+
+                  <div class="filters__column">
+
+                    <div class="filters__title">
+                      <h6>Filter results by:</h6>
+                    </div>
+
+                    <div class="filters">
+
+                      <div class="filters__option filters__color">
+                        <label for="filters-color" class="filters__label">Colors</label>
+                        <select id="filters-color" class="filters__select" name="select">
+                          <option value="1">Colors</option>
+                          <option value="2">White</option>
+                          <option value="3">Black</option>
+                          <option value="4">Tan</option>
+                          <option value="5">Yellow</option>
+                          <option value="6">Orange</option>
+                          <option value="7">Red</option>
+                          <option value="8">Purple</option>
+                          <option value="9">Blue</option>
+                          <option value="10">Green</option>
+                          <option value="11">Pink</option>
+                        </select>
+                      </div>
+
+
+                    </div>
+
+                  </div>
+                  <div class="filters__column">
+
+                    <div class="filters__title">
+                      <h6>Search:</h6>
+                    </div>
+                    <input type="text" class="searchinput"></input>
+                    <button class="fa fa-search"></button>
+                  </div>
+
+
+                  <div class="filters__column">
+
+                    <div class="filters__title">
+                      <h6>Sort results by:</h6>
+                    </div>
+
+                    <div class="filters">
+
+                      <div class="filters__option filters__sort">
+                        <label for="filters-sort" class="filters__label">Sort by</label>
+                        <select id="filters-sort" class="filters__select" name="select">
+                          <option value="1">Sort by:</option>
+                          <option value="2">Customer Rating</option>
+                          <option value="3">Price: Lowest to Highest</option>
+                          <option value="4">Price: Highest to Lowest</option>
+                          <option value="5">Newest to Oldest</option>
+                          <option value="6">Oldest to Newest</option>
+                        </select>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+              <br />
+              <br />
+              <br />
+              <br />
+
               <h2>Featured Products</h2>
               <div className="row" data-aos="fade-up" data-aos-duration={500}>
                 <div className="col-sm-6 col-md-3 col">

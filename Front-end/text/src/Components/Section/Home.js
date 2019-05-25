@@ -13,7 +13,7 @@ export default class Home extends Component {
                 for pet shops &amp; </span>
                 <span>veternary owners</span>
               </h1>
-              <a className="btn btn-primary btn-lg" href="shop.html" role="button">shop now</a>
+              <a className="btn btn-primary btn-lg" href="/shop" role="button">shop now</a>
             </div>
             {/* Row */}
             <div className="row" data-aos="fade-up" data-aos-easing="linear" data-aos-duration={500}>

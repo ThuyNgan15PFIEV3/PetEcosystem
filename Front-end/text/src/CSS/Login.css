@@ -1,0 +1,95 @@
+/* signin and signup form */
+
+.login-form.section.text-center {
+  background: #eee;
+}
+
+.panel-info>.panel-heading {
+  color: #ffffff;
+  background-color: #272525;
+  border-color: #272525;
+  padding: 15px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success.focus,
+.btn-success:active,
+.btn-success.active,
+.open>.dropdown-toggle.btn-success {
+  color: #fff;
+  background-color: #34c663;
+  border-color: #34c663;
+}
+
+a#btn-login {
+  width: 30%;
+}
+
+button#btn-signup {
+  width: 33%;
+  background: #34c663;
+}
+
+.loginbox {
+  width: 55%;
+  margin: 0 auto;
+}
+
+.panel-body {
+  padding: 35px;
+}
+
+.fpassword {
+  float: right;
+  position: relative;
+  top: -10px
+}
+
+.fpassword a {
+  color: #2196F3;
+  font-size: 0.85em;
+}
+
+.form-control {
+  height: 46px;
+}
+
+.input-group-addon {
+  color: #fff;
+  background-color: #e85342;
+}
+
+.btn-success {
+  background-color: #34c663;
+  border-color: #34c663;
+}
+
+/* //signin and signup form */
+
+
+.rad-txt {
+  position: relative;
+  top: 25px;
+  color: #000;
+  font-size: 1.8em;
+  text-transform: capitalize;
+  margin-bottom: 2em;
+}
+
+span.abtext {
+  top:200px;
+  color: #ffffff;
+  background: #e85342;
+  padding: 5px 19px;
+  border-radius: 0 20px 20px 0;
+}
+
+span.abtxt1 {
+  color: #000000;
+  background: #f7c052;
+  padding: 5px 19px;
+  border-radius: 20px 0px 0 20px;
+}
