@@ -12,12 +12,13 @@ const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
 
 //import model
-require('./models/product.model');
 require('./models/store.model');
 require('./models/category.model');
 require('./models/comment.model');
 require('./models/user.model');
 require('./models/post.model');
+require('./models/production.model');
+
 
 
 

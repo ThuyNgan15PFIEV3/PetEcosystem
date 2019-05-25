@@ -6,14 +6,21 @@ module.exports = (app) => {
     .post(storeController.create);
 
   app
+    .route('/stores/:typeOfStore')
+    .get(storeController.findAllStoreByType);
+
+  app
     .route('/stores/:storeId/comment')
     .get(storeController.getAllComment)
     .post(storeController.addComment);
 
   app
-    .route('/stores/:storeId')
+    .route('/stores/detail/:storeId')
     .get(storeController.findOne)
-    .post(storeController.addProduct)
     .put(storeController.update)
     .delete(storeController.delete);
+  app
+    .route('/stores/detail/:storeId/products')
+    .post(storeController.addProduct)
+
 }
