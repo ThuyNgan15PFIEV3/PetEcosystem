@@ -16,6 +16,9 @@ require('./models/product.model');
 require('./models/store.model');
 require('./models/category.model');
 require('./models/comment.model');
+require('./models/user.model');
+require('./models/post.model');
+
 
 
 const app = Express();
@@ -24,10 +27,10 @@ global.__rootDir = __dirname.replace('/server', '');
 app
     .use(Cors())
     .use(BodyParser.json())
-    .use(BodyParser.urlencoded({extended: true}))
-    .use(Express.static(Path.resolve(__dirname, '..', 'public'), {maxAge: 31557600000}))
-	.set('views', Path.join(__dirname, '..', 'public', 'views'))
-	.set('view engine', 'ejs');
+    .use(BodyParser.urlencoded({ extended: true }))
+    .use(Express.static(Path.resolve(__dirname, '..', 'public'), { maxAge: 31557600000 }))
+    .set('views', Path.join(__dirname, '..', 'public', 'views'))
+    .set('view engine', 'ejs');
 
 const routePath = `${__dirname}/routes/`;
 FS.readdirSync(routePath).forEach((file) => {
@@ -40,18 +43,18 @@ FS.readdirSync(routePath).forEach((file) => {
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
-mongoose.connect(dbConfig.url, {
+mongoose.connect(dbConfig.remoteUrl, {
     useNewUrlParser: true
 }).then(() => {
-    console.log("Successfully connected to the database");    
+    console.log("Successfully connected to the database");
 }).catch(err => {
     console.log('Could not connect to the database. Exiting now...', err);
     process.exit();
 });
 
 
-Http.createServer(app).listen(3030, () => {
-    console.log(`App listening on 3030!`);
+Http.createServer(app).listen(4000, () => {
+    console.log(`App listening on 4000!`);
 });
 
 app.get('/', (req, res) => {
@@ -62,4 +65,3 @@ app.get('/', (req, res) => {
         category: "/category"
     });
 });
-

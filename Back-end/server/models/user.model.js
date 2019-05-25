@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
@@ -20,17 +21,9 @@ const userSchema = new Schema({
         default: true
     },
     address: String,
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now,
-    },
-    deletedAt: Date
-});
-userSchema.set('toJSON', { virtuals: true });
 
-const Users = mongoose.model('Users', userSchema);
-module.exports = Users;
+}, {
+    timestamps: true
+}, );
+
+module.exports = mongoose.model('User', userSchema);

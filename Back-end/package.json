@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "bcrypt": "^3.0.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.4",
     "ejs": "^2.5.8",
     "express": "^4.16.2",
