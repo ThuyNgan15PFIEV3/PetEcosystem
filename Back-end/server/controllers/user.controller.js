@@ -1,4 +1,4 @@
-const Users = require('../models/users.model');
+const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 import { JWTHelper } from '../helpers';
 
@@ -19,7 +19,7 @@ export default class UserController {
                     error: "password id required filed"
                 })
             }
-            const user = await Users.findOne({
+            const user = await User.findOne({
                 username: username
             });
             if (!user) {
@@ -64,7 +64,7 @@ export default class UserController {
                 'role': req.body.role,
                 'address': req.body.address
             };
-            if (await Users.findOne({ username: newUser.username })) {
+            if (await User.findOne({ username: newUser.username })) {
                 console.log('Username is already taken!');
                 return res.status(400).json({
                     success: false,
@@ -72,7 +72,7 @@ export default class UserController {
                 });
             }
             newUser.password = bcrypt.hashSync(newUser.password, 10);
-            await Users.create(newUser, function(err, data) {
+            await User.create(newUser, function(err, data) {
                 if (err) {
                     console.log('ERROR:', err);
                 }
@@ -94,7 +94,7 @@ export default class UserController {
     getUserById = async(req, res, next) => {
         try {
             const user = req.params.id;
-            await Users.findById(user, function(err, data) {
+            await User.findById(user, function(err, data) {
                 if (err) {
                     console.log('ERROR:', err);
                 }
@@ -113,7 +113,7 @@ export default class UserController {
     };
     getAllUser = async(req, res, next) => {
         try {
-            await Users.find({}, function(err, data) {
+            await User.find({}, function(err, data) {
                 if (err) {
                     console.log('ERROR:', err);
                 }
@@ -133,7 +133,7 @@ export default class UserController {
     deleteUser = async(req, res, next) => {
         try {
             const user = req.params.id;
-            await Users.deleteOne({ _id: user }, function(err) {
+            await User.deleteOne({ _id: user }, function(err) {
                 if (!err) {
                     return res.status(200).json({
                         success: true,
@@ -154,7 +154,7 @@ export default class UserController {
         try {
             const user = req.params.id;
             const { username, address, role, name, password } = req.body;
-            const updatedUser = await Users.findOneAndUpdate(
+            const updatedUser = await User.findOneAndUpdate(
                 user, {
                     username,
                     address,
