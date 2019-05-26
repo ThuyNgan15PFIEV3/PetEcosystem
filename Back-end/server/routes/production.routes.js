@@ -6,6 +6,7 @@ module.exports = (app) => {
     .post(productionController.create);
   app
     .route('/products/:productionId')
+    .get(productionController.findOne)
     .put(productionController.update)
     .delete(productionController.delete);
 }

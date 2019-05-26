@@ -41,7 +41,6 @@ exports.findAll = async (req, res) => {
 exports.findOne = async (req, res) => {
   try {
     const store = await Store.findById(req.params.storeId).populate({ path: 'comments', populate: { path: 'userId' } }).populate('belongToUser').populate('products');
-    console.log(store);
     if (!store) {
       return res.status(400).json({
         success: false,

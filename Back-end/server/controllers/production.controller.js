@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Production = mongoose.model('Production');
+const Store = mongoose.model('Store');
 
 exports.create = async (req, res) => {
   try {
@@ -37,6 +38,33 @@ exports.findAll = async (req, res) => {
   };
 };
 
+
+exports.findOne = async (req, res) => {
+  try {
+    const production = await Production.findById(req.params.productionId).populate({ path: 'comments', populate: { path: 'userId' } });
+    const store = await Store.findOne({ products: req.params.productionId })
+    if (!production) {
+      return res.status(400).json({
+        success: false,
+        error: 'Production is not found'
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: production,
+      store: store
+    });
+  } catch (err) {
+    if (err.kind === "ObjectId") {
+      return res.status(404).send({
+        message: "Production not found with id " + req.params.productionId
+      });
+    }
+    return res.status(500).send({
+      message: "Error retrieving Store with id " + req.params.productionId
+    });
+  }
+};
 
 exports.update = async (req, res) => {
   try {

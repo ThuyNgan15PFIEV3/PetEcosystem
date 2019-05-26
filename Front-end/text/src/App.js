@@ -6,6 +6,7 @@ import Home from './Components/Section/Home';
 import Shop from './Components/Section/Shop';
 import SingleBlog from './Components/SingleComponent/SingleBlog';
 import SingleProduct from './Components/SingleComponent/SingleProduct';
+import SingleStore from './Components/SingleComponent/SingleStore';
 
 import Blog from './Components/Section/Blog';
 import Footer from './Components/Footer';
@@ -27,13 +28,14 @@ function App() {
           <Route exact path="/shop" component={Shop} />
           <Route exact path="/stores" component={Stores} />
           <Route exact path="/stores/:typeOfStore" component={AllStores} />
+          <Route exact path="/stores/detail/:storeId" component={SingleStore} />
 
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/signup" component={Signup}/>
 
           <Route path="/blog/:blogId" component={SingleBlog} />
-          <Route path="/shop/:productId" component={SingleProduct} />
+          <Route path="/products/:productId" component={SingleProduct} />
 
         </div>
         <Footer />

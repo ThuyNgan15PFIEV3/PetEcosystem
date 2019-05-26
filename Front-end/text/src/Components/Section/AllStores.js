@@ -34,7 +34,7 @@ export default class AllShop extends Component {
           </div>
           <div className="col-md-3">
             <figure>
-              <img src="/images/pete-3.jpg" alt="Web Design" width="100%" />
+              <img href={'/stores/' + this.props.match.params.typeOfStore + '/' + store._id} src="/images/pete-3.jpg" alt="Web Design" width="100%" />
             </figure>
           </div>
           <div className="col-md-9">
@@ -43,6 +43,7 @@ export default class AllShop extends Component {
           <div className="col-md-9">
             <p>Địa Chỉ: {store.description}</p>
           </div>
+          <button><a href={'/stores/detail/'+ store._id}> xem chi tiết</a></button>
         </div>
       </div>
     ))

@@ -1,27 +1,35 @@
 import React, { Component } from 'react';
 import axiosInstance from '../../helper/AxiosInstance';
-export default class SingleBlog extends Component {
+export default class SingleStore extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: "",
       name: "",
-      comments: []
+      comments: [],
+      products: []
     };
   }
 
   componentDidMount() {
     axiosInstance
-      .get('/posts/' + this.props.match.params.blogId)
+      .get('/stores/detail/' + this.props.match.params.storeId)
       .then((response) => {
         this.setState((prevState, props) => {
+          var username
+          if (response.data.data.belongToUser) {
+            username = response.data.data.belongToUser.name
+          } else {
+            username = ""
+          }
           return {
             data: response.data.data,
-            name: response.data.data.belongToUser.name,
-            comments: response.data.data.comments
+            name: username,
+            comments: response.data.data.comments,
+            products: response.data.data.products
           }
         })
-        console.log(this.state.comments);
+        console.log(this.state.products);
       })
       .catch((error) => {
         console.log(error);
@@ -29,6 +37,24 @@ export default class SingleBlog extends Component {
   }
 
   render() {
+
+    var listProducts = this.state.products.map(product => (
+      <div className="col-sm-6 col-md-3 col">
+        <div className="thumbnail">
+          <figure className="image one">
+            <a href={'/products/' + product._id}><img src="/images/product-2.jpg" className="img-responsive" alt="Responsive image" /></a>
+          </figure>
+          <div className="caption">
+            <h3><a href="product_single.html">{product.name}</a></h3>
+            <p>{product.description}</p>
+            <div className="box">
+              <p><span>{product.price} </span> Only</p>
+              <span className="cart"><i className="fa fa-shopping-cart" aria-hidden="true" /></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
     var listComments = this.state.comments.map(comment => {
       const name = comment.userId.name;
       return (
@@ -46,7 +72,7 @@ export default class SingleBlog extends Component {
         <div className="banner">
           <div className="container">
             <div className="row">
-              <div className="col-sm-12"><h1>Read Our Blog</h1></div>
+              <div className="col-sm-12"><h1>Our Store</h1></div>
             </div>
           </div>
         </div>
@@ -55,13 +81,13 @@ export default class SingleBlog extends Component {
         <section className="blog_single">
           <div className="container">
             <div className="heading">
-              <h2>{this.state.data.title}</h2>
+              <h2>{this.state.data.name}</h2>
             </div>
             <div className="social-buttons" data-aos="fade-up" data-aos-duration={500}>
               <div className="row">
                 <div className="col-sm-7 col-md-6">
                   <div className="inner-text">
-                    <h3>{this.state.data.createdAt} Posted by <span>{this.state.name}</span></h3>
+                    <h3>{this.state.data.createdAt} Created by <span>{this.state.name}</span></h3>
                   </div>
                 </div>
                 <div className="col-sm-5 col-md-6">
@@ -88,9 +114,28 @@ export default class SingleBlog extends Component {
             <div className="contant">
               <div className="row" style={{ marginRight: 0, marginLeft: 0 }} data-aos="fade-up" data-aos-duration={500}>
                 <img src={this.state.data.image || "/images/blog-single.jpg"} alt="test" className="img-thumbnail img-responsive image" />
-                <p>{this.state.data.content} </p>
+                <p>{this.state.data.description} </p>
               </div>
             </div>
+            <section id="product">
+              <div className="container">
+                <div className="inner-content">
+                  <h2 style={{ paddingTop: '40px' }}>Latest Products</h2>
+                  <div className="row" data-aos="fade-up" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
+                    {listProducts}
+                  </div>
+                  <div className="products-display">
+                    <a href="#" className="previous">Previous</a>
+                    <a href="#" className="next">Next</a>
+                  </div>
+                </div>
+                {/* Inner-content End */}
+              </div>
+              {/* Container End */}
+            </section>
+            {/* Product Section End */}
+
+
             <section className="review">
               <div className="container">
                 <div className="inner-content">
@@ -104,7 +149,8 @@ export default class SingleBlog extends Component {
                   </div>
                 </div>
               </div>
-            </section>            <div className="col-12" data-aos="fade-up">
+            </section>
+            <div className="col-12" data-aos="fade-up">
               <h2>Write a Review</h2>
               <form className="form-horizontal">
                 <fieldset>
