@@ -5,7 +5,7 @@ module.exports = (app) => {
         .get(userController.getAllUser);
     app.route('/user/:id')
         .get(userController.getUserById);
-    app.route('/user/create')
+    app.route('/user/register')
         .post(userController.createNewUser);
     app.route('/login')
         .post(userController.login);
