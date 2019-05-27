@@ -1,8 +1,7 @@
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
-    username: {
+    email: {
         type: String,
         require: true,
         unique: true
@@ -11,7 +10,8 @@ const userSchema = new Schema({
         require: true,
         type: String
     },
-    name: String,
+    address: String,
+    username: String,
     role: {
         type: String,
         enum: ['admin', 'normal', 'adminShop']
@@ -20,10 +20,15 @@ const userSchema = new Schema({
         type: Boolean,
         default: true
     },
-    address: String,
-
-}, {
-    timestamps: true
-}, );
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+    },
+    deletedAt: Date
+});
 
 module.exports = mongoose.model('User', userSchema);

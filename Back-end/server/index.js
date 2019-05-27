@@ -44,7 +44,7 @@ FS.readdirSync(routePath).forEach((file) => {
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
-mongoose.connect(dbConfig.remoteUrl, {
+mongoose.connect(dbConfig.remoteUrl2, {
     useNewUrlParser: true
 }).then(() => {
     console.log("Successfully connected to the database");

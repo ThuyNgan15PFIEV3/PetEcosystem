@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class Navbar extends Component {
+
   render() {
+
+    const isLoggedIn = localStorage.getItem('username');
+    // console.log(isLoggedIn);
+    let username;
+    if (isLoggedIn) {
+      username = <li><a href="/logout">Log out</a></li>
+    }
+    else {
+      username = <li><a href="/logout">Log in</a></li> 
+    }
+    
     return (
       <div>
         <header className="header">
@@ -27,7 +39,7 @@ export default class Navbar extends Component {
                   <li><a href="/shop">Shop </a></li>
                   <li><a href="/stores">stores </a></li>
                   <li><a href="/blog">Blog </a></li>
-                  <li><a href="/login">Login </a></li>
+                  {username}
                 </ul>
               </div>{/* /.navbar-collapse */}
             </div>{/* /.container*/}

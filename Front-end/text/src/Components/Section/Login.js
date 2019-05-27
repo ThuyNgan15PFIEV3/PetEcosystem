@@ -1,7 +1,51 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../CSS/Login.css';
+import axiosInstance from '../../helper/AxiosInstance';
+import jwt_decode from 'jwt-decode'; 
+
 export default class Login extends Component {
+  
+  constructor(props) {
+    super(props)
+    this.handleLogin = this.handleLogin.bind(this)
+  }
+
+  // UNSAFE_componentWillMount() {
+  //   if (localStorage.getItem('username')) {
+  //     return this.props.history.push('/shop');
+  //   }
+  // }
+
+  handleLogin(event) {
+    event.preventDefault();
+    console.log('test');
+    const data = new FormData(event.target);
+    axiosInstance.post('/user/login', {
+      email: data.get('email'),
+      password: data.get('password')
+    }).then((response) => {
+      console.log(response);
+      if (response.data.success) {
+        // console.log(response.data.data.id);
+        // console.log(response.data.data.token);
+        // console.log(response.data.data.username);
+        // console.log(response.data.data.role);
+        localStorage.setItem('userId', response.data.data.id);
+
+        localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('username', response.data.data.username);
+        localStorage.setItem('role', response.data.data.role);
+        alert("Login Succesful");
+        // window.location.reload();
+      } else {
+        alert(response.data.error);
+      }
+    }).catch((error) => {
+      console.log("tets");
+      console.log(error);
+    })
+  }
   render() {
     return (
       <div>

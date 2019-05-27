@@ -5,52 +5,65 @@ import { JWTHelper } from '../helpers';
 export default class UserController {
     login = async(req, res, next) => {
         try {
-            let username = req.body.email;
+            let email = req.body.email;
             let password = req.body.password;
-            if (username === undefined) {
-                return res.status(400).json({
+            if (email === undefined) {
+                return res.json({
                     success: false,
-                    error: "username id required filed"
+                    error: "email is required filed"
                 })
             }
             if (password === undefined) {
-                return res.status(400).json({
+                return res.json({
                     success: false,
-                    error: "password id required filed"
+                    error: "password is required filed"
                 })
             }
-            const user = await Users.findOne({
-                username: username
+            const user = await User.findOne({
+                email: email
             });
             if (!user) {
-                return res.status(400).json({
+                console.log("user not found");
+                return res.json({
                     success: false,
-                    error: "user not found"
+                    error: "Email is wrong"
                 })
             }
             const isValidPassword = await bcrypt.compareSync(password, user.password);
             if (!isValidPassword) {
-                return res.status(400).json({
+                return res.json({
                     success: false,
-                    error: "password is wrong"
+                    error: "Password is wrong"
                 })
             }
             // Gen token
             const token = await JWTHelper.sign({
-                id: user.id,
+                id: user._id,
                 username: user.username,
+                email: user.email,
                 role: user.role,
-                name: user.name
+                
             });
+         
             console.log(token);
-            return res.status(200).json({
+            return res.json({
                 success: true,
-                token: token
+                data: 
+                {
+                    token: token,
+                    id : user._id,
+                    email : user.email,
+                    username : user.username,
+                    
+                    role : user.role
+                }
+                    
+                
             });
 
         } catch (e) {
             console.log(e);
-            return res.status(400).json({
+            return res.json({
                 success: false,
                 error: e.message
             })
@@ -59,21 +72,21 @@ export default class UserController {
     createNewUser = async(req, res, next) => {
         try {
             const newUser = {
-                'username': req.body.username,
+                'email': req.body.email,
                 'password': req.body.password,
-                'name': req.body.name,
-                'role': 'normal',
+                'username': req.body.username,
+                'role': req.body.role,
                 'address': req.body.address
             };
-            if (await Users.findOne({ username: newUser.username })) {
-                console.log('Username is already taken!');
-                return res.status(400).json({
+            if (await User.findOne({ email: newUser.email })) {
+                console.log('Email is already taken!');
+                return res.json({
                     success: false,
-                    data: 'Username "' + newUser.username + '" is already taken'
+                    data: 'Email "' + newUser.email + '" is already taken'
                 });
             }
             newUser.password = bcrypt.hashSync(newUser.password, 10);
-            await Users.create(newUser, function(err, data) {
+            await User.create(newUser, function(err, data) {
                 if (err) {
                     console.log('ERROR:', err);
                 }
@@ -86,7 +99,7 @@ export default class UserController {
 
         } catch (e) {
             console.log(e);
-            return res.status(400).json({
+            return res.json({
                 success: false,
                 error: e.message
             })
@@ -154,13 +167,12 @@ export default class UserController {
     updateUser = async(req, res, next) => {
         try {
             const user = req.params.id;
-            const { username, address, role, name, password } = req.body;
-            const updatedUser = await User.findOneAndUpdate(
+            const { username, address, role, password } = req.body;
+            await User.findOneAndUpdate(
                 user, {
                     username,
                     address,
                     role,
-                    name,
                     password: await bcrypt.hashSync(password, 10)
                 }, { new: true },
                 (err, data) => {
@@ -184,4 +196,5 @@ export default class UserController {
             });
         }
     };
-}
+
+};
