@@ -28,20 +28,5 @@ export default class  Authentication {
             return response.returnError(res, e);
         }
     }
-    static authenticateSocket = async (socket) => {
-        const token = socket.handshake.query.token;
-        if (token === undefined) {
-            return Promise.reject(new Error ('Cannot authenticate your connection'));
-        }
-        const jwtData = await JWTHelper.verify(token);
-        const userLogin = await userRepository.getOne({
-            where: {
-                id: jwtData.id
-            }
-        });
-        if (!userLogin) {
-            return response.returnError(res, new Error ('User not found'));
-        }
-        socket.user = userLogin;
-    }
+   
 }

@@ -19,7 +19,7 @@ export default class UserController {
                     error: "password id required filed"
                 })
             }
-            const user = await User.findOne({
+            const user = await Users.findOne({
                 username: username
             });
             if (!user) {
@@ -38,14 +38,15 @@ export default class UserController {
             // Gen token
             const token = await JWTHelper.sign({
                 id: user.id,
-                username: user.username
+                username: user.username,
+                role: user.role,
+                name: user.name
             });
-
-            res.render('homepage', { user: user });
-            // return res.status(200).json({
-            //     success: true,
-            //     data: res.render('homepage', { title: 'Login' }, { Users: req.user })
-            // });
+            console.log(token);
+            return res.status(200).json({
+                success: true,
+                token: token
+            });
 
         } catch (e) {
             console.log(e);
@@ -61,10 +62,10 @@ export default class UserController {
                 'username': req.body.username,
                 'password': req.body.password,
                 'name': req.body.name,
-                'role': req.body.role,
+                'role': 'normal',
                 'address': req.body.address
             };
-            if (await User.findOne({ username: newUser.username })) {
+            if (await Users.findOne({ username: newUser.username })) {
                 console.log('Username is already taken!');
                 return res.status(400).json({
                     success: false,
@@ -72,7 +73,7 @@ export default class UserController {
                 });
             }
             newUser.password = bcrypt.hashSync(newUser.password, 10);
-            await User.create(newUser, function(err, data) {
+            await Users.create(newUser, function(err, data) {
                 if (err) {
                     console.log('ERROR:', err);
                 }
