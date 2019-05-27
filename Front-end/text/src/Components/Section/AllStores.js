@@ -41,7 +41,7 @@ export default class AllShop extends Component {
             <p>Mô Tả: {store.description}</p>
           </div>
           <div className="col-md-9">
-            <p>Địa Chỉ: {store.description}</p>
+            <p>Địa Chỉ: {store.address}</p>
           </div>
           <button><a href={'/stores/detail/'+ store._id}> xem chi tiết</a></button>
         </div>
