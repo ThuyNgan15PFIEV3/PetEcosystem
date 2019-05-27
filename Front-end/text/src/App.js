@@ -15,6 +15,7 @@ import Stores from './Components/Section/Stores';
 
 
 import './App.css';
+import Users from './Components/Admin/Users';
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
 
           <Route path="/blog/:blogId" component={SingleBlog} />
           <Route path="/products/:productId" component={SingleProduct} />
+
+          <Route exact path="/admin" component={Users} />
+
         </div>
       </BrowserRouter>
     </div>
