@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CommentSchema = mongoose.Schema({
-  user: {
-    // type: Schema.Types.ObjectId, ref: 'User',
-    type: String,
+  userId: {
+    type: Schema.Types.ObjectId, ref: 'User',
     require
   },
   comment: {
@@ -13,7 +12,6 @@ const CommentSchema = mongoose.Schema({
   },
   rating: {
     type: Number,
-    require
   },
 },
   {

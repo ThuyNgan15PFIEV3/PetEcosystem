@@ -3,7 +3,7 @@ const User = mongoose.model('User');
 const Post = mongoose.model('Post');
 const Comment = mongoose.model('Comment');
 
-exports.create = async(req, res) => {
+exports.create = async (req, res) => {
     try {
         if (!req.body) {
             return res.status(404).send({
@@ -23,7 +23,7 @@ exports.create = async(req, res) => {
     }
 };
 
-exports.findAll = async(req, res) => {
+exports.findAll = async (req, res) => {
     try {
         const posts = await Post.find();
         return res.status(200).json({
@@ -37,9 +37,10 @@ exports.findAll = async(req, res) => {
     };
 };
 
-exports.findOne = async(req, res) => {
+exports.findOne = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.postId).populate('Comment');
+        const post = await Post.findById(req.params.postId).populate({ path: 'comments', populate: { path: 'userId' } }).populate('belongToUser');
+
         if (!post) {
             return res.status(400).json({
                 success: false,
@@ -48,7 +49,7 @@ exports.findOne = async(req, res) => {
         }
         return res.status(200).json({
             success: true,
-            data: post
+            data: post,
         });
     } catch (err) {
         if (err.kind === "ObjectId") {
@@ -62,7 +63,7 @@ exports.findOne = async(req, res) => {
     }
 };
 
-exports.update = async(req, res) => {
+exports.update = async (req, res) => {
     try {
         const post = req.params.postId;
         await Post.findOneAndUpdate(post, req.body, { new: true }, (err, data) => {
@@ -82,7 +83,7 @@ exports.update = async(req, res) => {
     }
 }
 
-exports.delete = async(req, res) => {
+exports.delete = async (req, res) => {
     try {
         const post = await Post.findByIdAndRemove(req.params.postId);
         return res.status(200).json({
@@ -101,7 +102,7 @@ exports.delete = async(req, res) => {
     }
 };
 
-exports.addComment = async(req, res) => {
+exports.addComment = async (req, res) => {
     try {
         const comment = await new Comment(req.body);
         await comment.save();
@@ -119,7 +120,7 @@ exports.addComment = async(req, res) => {
     }
 }
 
-exports.getAllComment = async(req, res) => {
+exports.getAllComment = async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId).populate('comments');
         return res.status(200).json({

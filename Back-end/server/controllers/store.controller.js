@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Store = mongoose.model('Store');
-const Product = mongoose.model('Product');
+const Production = mongoose.model('Production');
 const Comment = mongoose.model('Comment');
 exports.create = async (req, res) => {
   try {
@@ -40,7 +40,7 @@ exports.findAll = async (req, res) => {
 
 exports.findOne = async (req, res) => {
   try {
-    const store = await Store.findById(req.params.storeId).populate('products');
+    const store = await Store.findById(req.params.storeId).populate({ path: 'comments', populate: { path: 'userId' } }).populate('belongToUser').populate('products');
     if (!store) {
       return res.status(400).json({
         success: false,
@@ -105,7 +105,7 @@ exports.delete = async (req, res) => {
 
 exports.addProduct = async (req, res) => {
   try {
-    const product = await new Product(req.body);
+    const product = await new Production(req.body);
     await product.save();
     const store = await Store.findById(req.params.storeId);
     await store.products.push(product._id);
@@ -155,5 +155,20 @@ exports.getAllComment = async (req, res) => {
       message:
         err.message || "Some error occurred while add comment to the Product."
     });
+  }
+}
+
+exports.findAllStoreByType = async (req, res) => {
+  try {
+    const stores = await Store.find({ typeOfStore: req.params.typeOfStore });
+    return res.status(200).json({
+      success: true,
+      data: stores
+    })
+  } catch (err) {
+    return res.status(500).send({
+      message:
+        err.message || "Some error occurred while load stores"
+    })
   }
 }

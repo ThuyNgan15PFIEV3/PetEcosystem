@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const commentController = require('../controllers/comment.controller.js');
   app
-    .route('/categories')
+    .route('/comments')
     .get(commentController.findAll)
     .post(commentController.create);
   app
