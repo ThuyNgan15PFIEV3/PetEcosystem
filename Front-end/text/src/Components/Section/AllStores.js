@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axiosInstance from '../../helper/AxiosInstance';
-
+import NavBar from '../Navbar';
+import Footer from '../Footer';
 export default class AllShop extends Component {
   constructor(props) {
     super(props);
@@ -43,12 +44,14 @@ export default class AllShop extends Component {
           <div className="col-md-9">
             <p>Địa Chỉ: {store.address}</p>
           </div>
-          <button><a href={'/stores/detail/'+ store._id}> xem chi tiết</a></button>
+          <button><a href={'/stores/detail/' + store._id}> xem chi tiết</a></button>
         </div>
       </div>
     ))
     return (
       <div>
+        <NavBar />
+
         {/* Jumbotron */}
         <div className="banner">
           <div className="container">
@@ -67,6 +70,7 @@ export default class AllShop extends Component {
           </div>
         </section>
         {/* services section Ended */}
+        <Footer />
       </div>
     );
   }

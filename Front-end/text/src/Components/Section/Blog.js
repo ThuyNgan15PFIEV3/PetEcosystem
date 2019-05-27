@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axiosInstance from '../../helper/AxiosInstance';
-
+import NavBar from '../Navbar';
+import Footer from '../Footer';
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +39,7 @@ export default class Home extends Component {
     ))
     return (
       <div>
+        <NavBar />
         {/* Jumbotron */}
         <div className="banner">
           <div className="container">
@@ -63,6 +65,7 @@ export default class Home extends Component {
           </div>{/* /.container */}
         </section>
         {/* Blog Section End */}
+        <Footer/>
       </div>
     );
   }

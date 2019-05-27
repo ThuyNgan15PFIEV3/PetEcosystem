@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../CSS/Login.css';
+import NavBar from '../Navbar';
+import Footer from '../Footer';
 export default class Signup extends Component {
   render() {
     return (
       <div>
+        <NavBar />
         {/* Jumbotron */}
         <div className="banner">
           <div className="container">
@@ -80,6 +83,7 @@ export default class Signup extends Component {
 
           </div>
         </div>
+        <Footer />
       </div>
     )
   };

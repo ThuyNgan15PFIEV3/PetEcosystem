@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../CSS/Login.css';
 import axiosInstance from '../../helper/AxiosInstance';
-import jwt_decode from 'jwt-decode'; 
-
+import jwt_decode from 'jwt-decode';
+import NavBar from '../Navbar';
+import Footer from '../Footer';
 export default class Login extends Component {
-  
+
   constructor(props) {
     super(props)
     this.handleLogin = this.handleLogin.bind(this)
@@ -49,6 +50,7 @@ export default class Login extends Component {
   render() {
     return (
       <div>
+        <NavBar />
         {/* Jumbotron */}
         <div className="banner">
           <div className="container">
@@ -124,6 +126,7 @@ export default class Login extends Component {
 
           </div>
         </div>
+        <Footer />
       </div>
     )
   };

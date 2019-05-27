@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../../CSS/Shop.css';
 import axiosInstance from '../../helper/AxiosInstance';
-
+import NavBar from '../Navbar';
+import Footer from '../Footer';
 export default class Shop extends Component {
 
   constructor(props) {
@@ -130,6 +131,7 @@ export default class Shop extends Component {
     return (
       <div>
         {/* Jumbotron */}
+        <NavBar />
         <div className="banner">
           <div className="container">
             <div>
@@ -220,6 +222,7 @@ export default class Shop extends Component {
           {/* Container End */}
         </section>
         {/* Product Section End */}
+        <Footer />
       </div>
     );
   }

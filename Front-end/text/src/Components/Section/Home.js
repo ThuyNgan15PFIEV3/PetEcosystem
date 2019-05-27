@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-
+import NavBar from '../Navbar';
+import Footer from '../Footer';
 export default class Home extends Component {
   render() {
     return (
       <div>
         {/* Jumbotron */}
+        <NavBar />
         <div className="jumbotron">
           {/* Container */}
           <div className="container">
@@ -274,6 +276,7 @@ export default class Home extends Component {
             {/* 2st Row End*/}
           </div>{/* /.container */}
         </section>
+        <Footer />
       </div>
     );
   }

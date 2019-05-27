@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../helper/AxiosInstance';
+import NavBar from '../Navbar';
+import Footer from '../Footer';
 
 export default class SingleProduct extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ export default class SingleProduct extends Component {
         console.log(response);
         this.setState((prevState, props) => {
           var shopname
-          if(response.data.store) {
+          if (response.data.store) {
             shopname = response.data.store.name
           } else {
             shopname = ""
@@ -52,6 +54,7 @@ export default class SingleProduct extends Component {
     })
     return (
       <div>
+        <NavBar />
         {/* Jumbotron */}
         <div className="banner">
           <div className="container">
@@ -158,7 +161,7 @@ export default class SingleProduct extends Component {
           </div>
         </section>
         {/* Blog-single Section End */}
-
+        <Footer />
 
       </div>
     );

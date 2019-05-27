@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-
+import NavBar from '../Navbar';
+import Footer from '../Footer';
 export default class Stores extends Component {
   render() {
     return (
       <div>
+        <NavBar />
         {/* Jumbotron */}
         <div className="banner">
           <div className="container">
@@ -69,6 +71,7 @@ export default class Stores extends Component {
           </div>
         </section>
         {/* services section Ended */}
+        <Footer />
       </div>
     );
   }

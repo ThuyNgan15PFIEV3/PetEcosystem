@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axiosInstance from '../../helper/AxiosInstance';
+import NavBar from '../Navbar';
+import Footer from '../Footer';
+import Navbar from '../Navbar';
+
 export default class SingleStore extends Component {
   constructor(props) {
     super(props);
@@ -68,6 +72,7 @@ export default class SingleStore extends Component {
     })
     return (
       <div>
+        <Navbar />
         {/* Jumbotron */}
         <div className="banner">
           <div className="container">
@@ -180,6 +185,7 @@ export default class SingleStore extends Component {
           </div>{/* /.container */}
         </section>
         {/* blog_single section Ended */}
+        <Footer />
       </div>
     );
   }
