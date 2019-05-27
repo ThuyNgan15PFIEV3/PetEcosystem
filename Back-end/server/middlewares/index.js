@@ -1,4 +1,6 @@
-import {Authentication} from './authentication'
+import Authentication from './authentication';
+import RoleManagement from './roleManagement';
 module.exports = {
-    Authentication
-};
+    Authentication,
+    RoleManagement
+}
