@@ -65,7 +65,7 @@ exports.findOne = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const category = req.params.CategoryId;
-    await Category.findOneAndUpdate(category, req.body, { new: true }, (err, data) => {
+    await Category.findByIdAndUpdate(category, req.body, { new: true }, (err, data) => {
       if (err) return res.status(400).json({
         success: false,
         error: err.message

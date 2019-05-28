@@ -24,7 +24,7 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const comments = await Comment.find();
+    const comments = await Comment.find().populate('userId','email');
     return res.status(200).json({
       success: true,
       data: comments
@@ -41,7 +41,7 @@ exports.findAll = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const comment = req.params.commentId;
-    await Comment.findOneAndUpdate(comment, req.body, { new: true }, (err, data) => {
+    await Comment.findByIdAndUpdate(comment, req.body, { new: true }, (err, data) => {
       if (err) return res.status(400).json({
         success: false,
         error: err.message

@@ -65,17 +65,18 @@ exports.findOne = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const store = req.params.productId;
-    await Store.findOneAndUpdate(store, req.body, { new: true }, (err, data) => {
-      if (err) return res.status(400).json({
-        success: false,
-        error: err.message
-      });
-      return res.status(200).json({
-        success: true,
-        data: data
-      });
-    })
+    console.log(req.params.storeId);
+    await Store.findByIdAndUpdate(req.params.storeId, req.body, { new: true }, (err, data) => {
+        console.log(data);
+        if (err) return res.status(400).json({
+          success: false,
+          error: err.message
+        });
+        return res.status(200).json({
+          success: true,
+          data: data
+        });
+      })
   } catch (err) {
     return res.status(500).send({
       message:

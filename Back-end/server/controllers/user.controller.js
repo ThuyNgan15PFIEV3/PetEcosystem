@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 import { JWTHelper } from '../helpers';
 
 export default class UserController {
-    login = async(req, res, next) => {
+    login = async (req, res, next) => {
         try {
             let email = req.body.email;
             let password = req.body.password;
@@ -42,23 +42,23 @@ export default class UserController {
                 username: user.username,
                 email: user.email,
                 role: user.role,
-                
+
             });
-         
+
             console.log(token);
             return res.json({
                 success: true,
-                data: 
+                data:
                 {
                     token: token,
-                    id : user._id,
-                    email : user.email,
-                    username : user.username,
-                    
-                    role : user.role
+                    id: user._id,
+                    email: user.email,
+                    username: user.username,
+
+                    role: user.role
                 }
-                    
-                
+
+
             });
 
         } catch (e) {
@@ -69,7 +69,7 @@ export default class UserController {
             })
         }
     };
-    createNewUser = async(req, res, next) => {
+    createNewUser = async (req, res, next) => {
         try {
             const newUser = {
                 'email': req.body.email,
@@ -86,7 +86,7 @@ export default class UserController {
                 });
             }
             newUser.password = bcrypt.hashSync(newUser.password, 10);
-            await User.create(newUser, function(err, data) {
+            await User.create(newUser, function (err, data) {
                 if (err) {
                     console.log('ERROR:', err);
                 }
@@ -105,10 +105,10 @@ export default class UserController {
             })
         }
     };
-    getUserById = async(req, res, next) => {
+    getUserById = async (req, res, next) => {
         try {
             const user = req.params.id;
-            await User.findById(user, function(err, data) {
+            await User.findById(user, function (err, data) {
                 if (err) {
                     console.log('ERROR:', err);
                 }
@@ -125,9 +125,9 @@ export default class UserController {
             })
         }
     };
-    getAllUser = async(req, res, next) => {
+    getAllUser = async (req, res, next) => {
         try {
-            await User.find({}, function(err, data) {
+            await User.find({}, function (err, data) {
                 if (err) {
                     console.log('ERROR:', err);
                 }
@@ -144,10 +144,10 @@ export default class UserController {
             });
         }
     };
-    deleteUser = async(req, res, next) => {
+    deleteUser = async (req, res, next) => {
         try {
             const user = req.params.id;
-            await User.deleteOne({ _id: user }, function(err) {
+            await User.deleteOne({ _id: user }, function (err) {
                 if (!err) {
                     return res.status(200).json({
                         success: true,
@@ -164,7 +164,7 @@ export default class UserController {
             });
         }
     }
-    updateUser = async(req, res, next) => {
+    updateUser = async (req, res, next) => {
         try {
             const user = req.params.id;
             const { username, address, role, password } = req.body;

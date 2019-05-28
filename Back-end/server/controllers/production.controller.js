@@ -69,7 +69,7 @@ exports.findOne = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const production = req.params.productionId;
-    await Production.findOneAndUpdate(Production, req.body, { new: true }, (err, data) => {
+    await Production.findByIdAndUpdate(Production, req.body, { new: true }, (err, data) => {
       if (err) return res.status(400).json({
         success: false,
         error: err.message

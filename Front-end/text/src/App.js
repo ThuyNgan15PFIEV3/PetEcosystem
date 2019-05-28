@@ -12,10 +12,13 @@ import Login from './Components/Section/Login';
 import Signup from './Components/Section/Signup';
 import AllStores from './Components/Section/AllStores';
 import Stores from './Components/Section/Stores';
-
+import AdminStores from './Components/Admin/AdminStores';
 
 import './App.css';
 import Users from './Components/Admin/Users';
+import AdminProducts from './Components/Admin/AdminProducts';
+import AdminPosts from './Components/Admin/AdminPosts';
+import AdminComments from './Components/Admin/AdminComments';
 
 function App() {
   return (
@@ -35,7 +38,11 @@ function App() {
           <Route path="/blog/:blogId" component={SingleBlog} />
           <Route path="/products/:productId" component={SingleProduct} />
 
-          <Route exact path="/admin" component={Users} />
+          <Route exact path="/admin/users" component={Users} />
+          <Route exact path="/admin/stores" component={AdminStores} />
+          <Route exact path="/admin/products" component={AdminProducts} />
+          <Route exact path="/admin/posts" component={AdminPosts} />
+          <Route exact path="/admin/comments" component={AdminComments} />
 
         </div>
       </BrowserRouter>

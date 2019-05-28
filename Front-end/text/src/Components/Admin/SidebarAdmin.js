@@ -5,36 +5,13 @@ export default class SidebarAdmin extends Component {
 
   render() {
     return (
-      < div id="sidebar-wrapper" >
-        <ul className="sidebar-nav">
-          <li className="sidebar-brand">
-            <a href="#">
-              Start Bootstrap
-     </a>
-          </li>
-          <li>
-            <a href="#">Dashboard</a>
-          </li>
-          <li>
-            <a href="#">Shortcuts</a>
-          </li>
-          <li>
-            <a href="#">Overview</a>
-          </li>
-          <li>
-            <a href="#">Events</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Services</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </ul>
-      </div >
+      <div className="sidenav">
+        <a href="/admin/users">Users</a>
+        <a href="/admin/stores">Stores</a>
+        <a href="/admin/products">Products</a>
+        <a href="/admin/posts">Posts</a>
+        <a href="/admin/comments">Comments</a>
+      </div>
     );
   }
 }

@@ -16,8 +16,7 @@ const ProductionSchema = mongoose.Schema({
   image: {
     type: String,
   },
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
-
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 },
   {
     timestamps: true
