@@ -1,0 +1,50 @@
+button.chr-cart {
+	font-size: 0.9em;
+	color: #fff;
+	border: none;
+	width: 100%;
+	border-radius: 5px;
+	padding: 4px 15px;
+	text-align: center;
+	border-left: none !important;
+	background: none;
+	background: #ee4f4f;
+	margin: 10px 0 0;
+	text-decoration: none;
+	text-transform: capitalize;
+	outline: none;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+}
+
+button.chr-cart i {
+	font-size: 1.2em;
+	font-weight: 600;
+	margin-left: 10px;
+	background: #fff;
+	width: 28px;
+	height: 28px;
+	line-height: 27px;
+	color: #000;
+	border-radius: 50%;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+}
+
+button.chr-cart:hover {
+	background: #34c663;
+	color: #000;
+}
+
+button.chr-cart:hover i {
+	background: transparent;
+	color: #fff;
+	font-size: 1.6em;
+	font-weight: normal;
+}

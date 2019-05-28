@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../CSS/Product.css';
 
 export default class Navbar extends Component {
 
   render() {
 
     const isLoggedIn = localStorage.getItem('username');
-    // console.log(isLoggedIn);
+    console.log(isLoggedIn);
     let username;
     if (isLoggedIn) {
+
       username = <li><a href="/logout">Log out</a></li>
     }
     else {
-      username = <li><a href="/logout">Log in</a></li> 
+      username = <li><a href="/logout">Log in</a></li>
     }
-    
+    let adminpage;
+    const isAdmin = localStorage.getItem('isAdmin');
+
+    if (isAdmin) {
+      adminpage = <li><a href="/admin">Admin</a></li>
+    }
+
+
     return (
       <div>
         <header className="header">
@@ -35,10 +44,11 @@ export default class Navbar extends Component {
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav navbar-right">
                   <li><a href="/"><i className="fa fa-home" aria-hidden="true" /> <span className="sr-only">(current)</span></a></li>
-                  <li><a href="/about">About </a></li>
+                  {adminpage}
                   <li><a href="/shop">Shop </a></li>
                   <li><a href="/stores">stores </a></li>
                   <li><a href="/blog">Blog </a></li>
+                  <li><a href="/mystore">My Store </a></li>
                   {username}
                 </ul>
               </div>{/* /.navbar-collapse */}

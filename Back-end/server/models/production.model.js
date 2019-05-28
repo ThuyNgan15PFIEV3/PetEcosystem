@@ -17,6 +17,7 @@ const ProductionSchema = mongoose.Schema({
     type: String,
   },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  category: { type: Schema.Types.ObjectId, ref: 'Category' }
 },
   {
     timestamps: true

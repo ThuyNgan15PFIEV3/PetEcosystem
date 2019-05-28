@@ -39,7 +39,7 @@ exports.findAll = async (req, res) => {
 
 exports.findOne = async (req, res) => {
   try {
-    const category = await Category.findById(req.params.CategoryId);
+    const category = await Category.findById(req.params.categoryId);
     if (!category) {
       return res.status(400).json({
         success: false,
@@ -64,7 +64,7 @@ exports.findOne = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const category = req.params.CategoryId;
+    const category = req.params.categoryId;
     await Category.findByIdAndUpdate(category, req.body, { new: true }, (err, data) => {
       if (err) return res.status(400).json({
         success: false,

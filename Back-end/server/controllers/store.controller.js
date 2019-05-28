@@ -134,7 +134,7 @@ exports.addComment = async (req, res) => {
     return res.status(200).json({
       success: true,
       data: store,
-      belongToProduct: req.params.storeId
+      belongToStore: req.params.storeId
     })
   } catch (err) {
     return res.status(500).send({

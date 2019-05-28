@@ -3,6 +3,8 @@ import axiosInstance from '../../helper/AxiosInstance';
 import NavBar from '../Navbar';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
+import { Link } from 'react-router-dom';
+import '../../CSS/SingleStore.css';
 
 export default class SingleStore extends Component {
   constructor(props) {
@@ -13,6 +15,40 @@ export default class SingleStore extends Component {
       comments: [],
       products: []
     };
+    this.handleSubmitComment = this.handleSubmitComment.bind(this)
+
+  }
+
+  handleSubmitComment(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    console.log(data.get('comment'));
+    console.log(this.props.match.params.storeId);
+    axiosInstance
+      .post('/stores/' + this.props.match.params.storeId + '/comment', {
+        userId: localStorage.getItem('userId'),
+        comment: data.get('comment')
+      })
+      .then((response) => {
+        this.componentDidMount();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  handleDelete(id, event) {
+    axiosInstance
+      .delete('/products/' + id)
+      .then((response) => {
+        if (response.data.success === true) {
+          alert('Delete Succesful');
+          this.componentDidMount();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   componentDidMount() {
@@ -33,7 +69,6 @@ export default class SingleStore extends Component {
             products: response.data.data.products
           }
         })
-        console.log(this.state.products);
       })
       .catch((error) => {
         console.log(error);
@@ -41,26 +76,73 @@ export default class SingleStore extends Component {
   }
 
   render() {
-
-    var listProducts = this.state.products.map(product => (
-      <div className="col-sm-6 col-md-3 col">
-        <div className="thumbnail">
-          <figure className="image one">
-            <a href={'/products/' + product._id}><img src="/images/product-2.jpg" className="img-responsive" alt="Responsive image" /></a>
-          </figure>
-          <div className="caption">
-            <h3><a href="product_single.html">{product.name}</a></h3>
-            <p>{product.description}</p>
-            <div className="box">
-              <p><span>{product.price} </span> Only</p>
-              <span className="cart"><i className="fa fa-shopping-cart" aria-hidden="true" /></span>
+    var myStore = localStorage.getItem('myStore')
+    let addProduct
+    let listProducts
+    if (this.props.match.params.storeId == myStore) {
+      addProduct = (
+        <div className="col-sm-6 col-md-3 col">
+          <div className="thumbnail">
+            <figure className="image one">
+              <a href={'/addproduct'}><img src="/images/add.jpg" className="img-responsive" alt="Responsive image" /></a>
+            </figure>
+            <div className="caption">
+              <h3><a href="/products/addproducts">Bấm vào đây để thêm sản phẩm</a></h3>
+              <p></p>
             </div>
           </div>
         </div>
-      </div>
-    ))
+      )
+      listProducts = this.state.products.map(product => (
+        <div className="col-sm-6 col-md-3 col">
+          <div className="thumbnail">
+            <figure className="image one">
+              <a href={'/products/' + product._id}><img src="/images/product-2.jpg" className="img-responsive" alt="Responsive image" /></a>
+            </figure>
+            <div className="caption productdisplay">
+              <h3><a href={'/products/' + product._id}>{product.name}</a></h3>
+              <p>{product.description}</p>
+              <div className="box">
+                <h3>Giá: {product.price}</h3>
+              </div>
+              <a href={'/editproduct/' + product._id}>
+                <button onClick={event => this.handleDelete()} className="chr-cart pchr-cart">Edit
+                  <i className="fa fa-pencil-square-o" aria-hidden="true" />
+                </button> </a>
+
+              <button onClick={event => this.handleDelete(product._id, event)} className="chr-cart pchr-cart">delete
+              <i className="fa fa-trash" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </div >
+      ))
+    } else {
+      listProducts = this.state.products.map(product => (
+        <div className="col-sm-6 col-md-3 col">
+          <div className="thumbnail">
+            <figure className="image one">
+              <a href={'/products/' + product._id}><img src="/images/product-2.jpg" className="img-responsive" alt="Responsive image" /></a>
+            </figure>
+            <div className="caption">
+              <h3><a href={'/products/' + product._id}>{product.name}</a></h3>
+              <p>{product.description}</p>
+              <div className="box">
+                <h3>Giá: {product.price}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+
     var listComments = this.state.comments.map(comment => {
-      const name = comment.userId.name;
+      let name;
+      if (comment.userId) {
+        name = comment.userId.username
+      } else {
+        name = 'Anonymous';
+      }
       return (
         <div className="review-content">
           <h6>{name}&nbsp;/
@@ -127,6 +209,7 @@ export default class SingleStore extends Component {
                 <div className="inner-content">
                   <h2 style={{ paddingTop: '40px' }}>Latest Products</h2>
                   <div className="row" data-aos="fade-up" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
+                    {addProduct}
                     {listProducts}
                   </div>
                   <div className="products-display">
@@ -147,7 +230,7 @@ export default class SingleStore extends Component {
                   <div className="row myrow1">
                     <div className="col-md-12">
                       <div className="myreview">
-                        <h2>Reviews</h2>
+                        <h2>Bình luận</h2>
                         {listComments}
                       </div>
                     </div>
@@ -156,23 +239,18 @@ export default class SingleStore extends Component {
               </div>
             </section>
             <div className="col-12" data-aos="fade-up">
-              <h2>Write a Review</h2>
-              <form className="form-horizontal">
+              <h2>Bình Luận Của Bạn</h2>
+              <form onSubmit={this.handleSubmitComment} className="form-horizontal">
                 <fieldset>
                   <div className="form-group">
+                    <br />
                     <div className="col-sm-4">
-                      <input className="form-control" placeholder="Enter your name" required="true" size={30} type="text" />
-                    </div>
-                    <div className="col-sm-4">
-                      <input className="form-control" placeholder="Enter your email" required="true" size={30} type="text" />
-                    </div>
-                    <div className="col-sm-4">
-                      <input className="form-control" placeholder="Your website" required="true" size={30} type="text" />
+                      <h3>{localStorage.getItem('username')}</h3>
                     </div>
                   </div>
                   <div className="form-group">
                     <div className="col-sm-12">
-                      <textarea className="form-control" placeholder="Type your message" required="true" rows={7} defaultValue={""} />
+                      <textarea className="form-control" name="comment" placeholder="Nhập bình luận tại đây" required="true" rows={7} defaultValue={""} />
                     </div>
                   </div>
                   <div className="col-sm-12 form-group">

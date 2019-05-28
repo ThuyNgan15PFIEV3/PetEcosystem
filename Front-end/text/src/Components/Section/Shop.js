@@ -15,6 +15,22 @@ export default class Shop extends Component {
     };
   }
 
+  handleSortProductsByCategory(event) {
+    var value = event.target.value;
+    var { temp } = this.state;
+    console.log(temp);
+    if (value == 1) {
+      this.setState({
+        products: temp
+      })
+    } else {
+      var searchProducts = temp.filter(product => product.category === value)
+      this.setState({
+        products: searchProducts
+      })
+    }
+  }
+
   handleSearchChange(event) {
     var value = event.target.value;
     this.setState({
@@ -25,9 +41,7 @@ export default class Shop extends Component {
   handleSearch(event) {
 
     var { searchText, temp } = this.state;
-    console.log(searchText);
     var searchProducts = temp.filter(function (product) {
-      console.log(product.name)
       return product.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
     });
     this.setState({
@@ -38,7 +52,6 @@ export default class Shop extends Component {
   handleSortProducts(event) {
     var value = event.target.value;
     const { products } = this.state;
-    console.log(value);
     switch (value) {
       case '1':
         products.sort((a, b) => {
@@ -71,7 +84,6 @@ export default class Shop extends Component {
     }
     console.log('test')
     this.setState({ products });
-    console.log(this.state.products);
   }
 
 
@@ -109,7 +121,7 @@ export default class Shop extends Component {
 
   render() {
     var listcategories = this.state.categories.map(category => (
-      <option value={category.name}>{category.name}</option>
+      <option value={category._id}>{category.name}</option>
     ))
     var listproducts = this.state.products.map(product => (
       <div className="col-sm-6 col-md-3 col">
@@ -117,12 +129,11 @@ export default class Shop extends Component {
           <figure className="image one">
             <a href={'/products/' + product._id}><img src="/images/product-2.jpg" className="img-responsive" alt="Responsive image" /></a>
           </figure>
-          <div className="caption">
+          <div className="caption productdisplay">
             <h3><a href="product_single.html">{product.name}</a></h3>
             <p>{product.description}</p>
             <div className="box">
-              <p><span>{product.price}</span> Only</p>
-              <span className="cart"><i className="fa fa-shopping-cart" aria-hidden="true" /></span>
+              <h3>Giá: {product.price}</h3>
             </div>
           </div>
         </div>
@@ -147,24 +158,18 @@ export default class Shop extends Component {
               <div class="filters__outer">
 
                 <div class="filters__inner">
-
                   <div class="filters__column">
-
                     <div class="filters__title">
                       <h6>Filter results:</h6>
                     </div>
-
                     <div class="filters">
-
                       <div class="filters__option filters__color">
                         <label for="filters-color" class="filters__label">Category</label>
-                        <select id="filters-color" class="filters__select" name="select">
+                        <select onChange={event => this.handleSortProductsByCategory(event)} id="filters-color" class="filters__select" name="select">
                           <option value="1">Select Category</option>
                           {listcategories}
                         </select>
                       </div>
-
-
                     </div>
 
                   </div>

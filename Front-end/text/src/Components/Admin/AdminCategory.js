@@ -4,7 +4,7 @@ import '../../CSS/admin.css';
 import axiosInstance from '../../helper/AxiosInstance';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-export default class AdminComments extends Component {
+export default class AdminCategory extends Component {
 
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ export default class AdminComments extends Component {
   }
 
   componentDidMount() {
-    axiosInstance.get('/comments').then(res => {
+    axiosInstance.get('/categories').then(res => {
       console.log(res.data.data);
       this.setState({
         data: res.data.data
@@ -41,9 +41,9 @@ export default class AdminComments extends Component {
     this.setState({
       data: this.state.data
     });
-    axiosInstance.put('/posts/' + row['_id'], {
-      title: row['title'],
-      content: row['content'],
+    axiosInstance.put('/categories/' + row['_id'], {
+      name: row['name'],
+      description: row['description'],
     }).then(res => {
       console.log(res);
       console.log('thanh cong');
@@ -52,13 +52,27 @@ export default class AdminComments extends Component {
     });
   }
 
+  onAddRow = (row) => {
+    axiosInstance.post('/categories', {
+      name: row['name'],
+      description: row['description'],
+    }).then(res => {
+      console.log(res);
+      this.state.data.push(res.data.data)
+      this.setState({
+        data: this.state.data
+      });
+    }).catch(err => {
+      console.log("Da sua khong thanh cong");
+    });
 
+  }
 
   onDeleteRow = (row) => {
     this.state.data = this.state.data.filter((product) => {
       return product._id !== row[0];
     });
-    axiosInstance.delete('/posts/' + row[0])
+    axiosInstance.delete('/categories/' + row[0])
       .then(res => {
         console.log("Da sua thanh cong");
       })
@@ -96,13 +110,13 @@ class RemoteAlternative extends React.Component {
   remote(remoteObj) {
     // Only cell editing, insert and delete row will be handled by remote store
     remoteObj.cellEdit = true;
+    remoteObj.insertRow = true;
     remoteObj.dropRow = true;
     return remoteObj;
   }
-
   usernameFormatter(cell, row) {
     if (cell !== null)
-      return cell.email;
+      return cell.username;
     else return
   }
   render() {
@@ -117,15 +131,16 @@ class RemoteAlternative extends React.Component {
       <BootstrapTable data={this.props.data}
         selectRow={selectRow}
         remote={this.remote}
-        deleteRow search
+        insertRow deleteRow search
         cellEdit={cellEditProp}
         options={{
           onCellEdit: this.props.onCellEdit,
           onDeleteRow: this.props.onDeleteRow,
+          onAddRow: this.props.onAddRow
         }}>
-        <TableHeaderColumn dataField='_id' hiddenOnInsert isKey={true}>Comment ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='userId' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} dataFormat={this.usernameFormatter}>Email</TableHeaderColumn>
-        <TableHeaderColumn dataField='comment'>Comment</TableHeaderColumn>
+        <TableHeaderColumn dataField='_id' hiddenOnInsert isKey={true}>Category ID</TableHeaderColumn>
+        <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='description'>Description</TableHeaderColumn>
       </BootstrapTable>
     );
   }

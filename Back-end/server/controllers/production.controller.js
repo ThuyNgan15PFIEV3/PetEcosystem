@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Production = mongoose.model('Production');
 const Store = mongoose.model('Store');
+const Comment = mongoose.model('Comment');
 
 exports.create = async (req, res) => {
   try {
@@ -68,8 +69,10 @@ exports.findOne = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
+    console.log(req.body);
     const production = req.params.productionId;
-    await Production.findByIdAndUpdate(Production, req.body, { new: true }, (err, data) => {
+
+    await Production.findByIdAndUpdate(production, req.body, { new: true }, (err, data) => {
       if (err) return res.status(400).json({
         success: false,
         error: err.message
@@ -105,3 +108,23 @@ exports.delete = async (req, res) => {
     });
   }
 };
+
+exports.addComment = async (req, res) => {
+  try {
+    const comment = await new Comment(req.body);
+    await comment.save();
+    const product = await Production.findById(req.params.productionId);
+    product.comments.push(comment._id);
+    product.save();
+    return res.status(200).json({
+      success: true,
+      data: product,
+      belongToProduct: req.params.productionId
+    })
+  } catch (err) {
+    return res.status(500).send({
+      message:
+        err.message || "Some error occurred while add comment to the Product."
+    });
+  }
+}

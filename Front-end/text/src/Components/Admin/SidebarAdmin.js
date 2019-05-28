@@ -11,6 +11,10 @@ export default class SidebarAdmin extends Component {
         <a href="/admin/products">Products</a>
         <a href="/admin/posts">Posts</a>
         <a href="/admin/comments">Comments</a>
+        <a href="/admin/category">Categories</a>
+
+        <a href="/">Back To shop</a>
+
       </div>
     );
   }

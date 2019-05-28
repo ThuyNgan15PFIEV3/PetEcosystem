@@ -12,6 +12,23 @@ export default class SingleProduct extends Component {
       name: "",
       comments: [],
     };
+    this.handleSubmitComment = this.handleSubmitComment.bind(this)
+  }
+
+  handleSubmitComment(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    axiosInstance
+      .post('/products/' + this.props.match.params.productId + '/comment', {
+        userId: localStorage.getItem('userId'),
+        comment: data.get('comment')
+      })
+      .then((response) => {
+        this.componentDidMount();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   componentDidMount() {
@@ -42,7 +59,12 @@ export default class SingleProduct extends Component {
   render() {
     const createdAt = new Date(this.state.data.createdAt).toString();
     var listComments = this.state.comments.map(comment => {
-      const name = comment.userId.name;
+      let name;
+      if (comment.userId) {
+        name = comment.userId.username
+      } else {
+        name = 'Anonymous';
+      }
       return (
         <div className="review-content">
           <h6>{name}&nbsp;/
@@ -124,7 +146,7 @@ export default class SingleProduct extends Component {
                   <div className="row myrow1">
                     <div className="col-md-12">
                       <div className="myreview">
-                        <h2>Reviews</h2>
+                        <h2>Bình Luận</h2>
                         {listComments}
                       </div>
                     </div>
@@ -133,23 +155,18 @@ export default class SingleProduct extends Component {
               </div>
             </section>
             <div className="col-12" data-aos="fade-up">
-              <h2>Write a Review</h2>
-              <form className="form-horizontal">
+              <h2>Bình Luận Của Bạn</h2>
+              <form onSubmit={this.handleSubmitComment} className="form-horizontal">
                 <fieldset>
                   <div className="form-group">
+                    <br />
                     <div className="col-sm-4">
-                      <input className="form-control" placeholder="Enter your name" required="true" size={30} type="text" />
-                    </div>
-                    <div className="col-sm-4">
-                      <input className="form-control" placeholder="Enter your email" required="true" size={30} type="text" />
-                    </div>
-                    <div className="col-sm-4">
-                      <input className="form-control" placeholder="Your website" required="true" size={30} type="text" />
+                      <h3>{localStorage.getItem('username')}</h3>
                     </div>
                   </div>
                   <div className="form-group">
                     <div className="col-sm-12">
-                      <textarea className="form-control" placeholder="Type your message" required="true" rows={7} defaultValue={""} />
+                      <textarea className="form-control" name="comment" placeholder="Nhập bình luận tại đây" required="true" rows={7} defaultValue={""} />
                     </div>
                   </div>
                   <div className="col-sm-12 form-group">

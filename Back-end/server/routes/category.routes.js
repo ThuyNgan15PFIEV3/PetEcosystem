@@ -5,7 +5,7 @@ module.exports = (app) => {
     .get(categoryController.findAll)
     .post(categoryController.create);
   app
-    .route('/categorys/:categoryId')
+    .route('/categories/:categoryId')
     .get(categoryController.findOne)
     .put(categoryController.update)
     .delete(categoryController.delete);

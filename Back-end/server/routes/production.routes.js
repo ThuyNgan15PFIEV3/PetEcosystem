@@ -4,6 +4,10 @@ module.exports = (app) => {
     .route('/products')
     .get(productionController.findAll)
     .post(productionController.create);
+
+  app
+    .route('/products/:productionId/comment')
+    .post(productionController.addComment);
   app
     .route('/products/:productionId')
     .get(productionController.findOne)
