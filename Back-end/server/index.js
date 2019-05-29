@@ -18,7 +18,7 @@ require('./models/comment.model');
 require('./models/user.model');
 require('./models/post.model');
 require('./models/production.model');
-
+require('./models/order.model');
 
 
 

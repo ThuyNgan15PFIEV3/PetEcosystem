@@ -26,7 +26,7 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const productions = await Production.find();
+    const productions = await Production.find().populate('category','name');
     return res.status(200).json({
       success: true,
       data: productions

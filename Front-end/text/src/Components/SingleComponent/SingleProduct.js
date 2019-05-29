@@ -12,7 +12,28 @@ export default class SingleProduct extends Component {
       name: "",
       comments: [],
     };
-    this.handleSubmitComment = this.handleSubmitComment.bind(this)
+    this.handleSubmitComment = this.handleSubmitComment.bind(this);
+    this.handleOrder = this.handleOrder.bind(this);
+  }
+
+  handleOrder(event) {
+    axiosInstance
+      .post('/orders', {
+        userId: localStorage.getItem('userId'),
+        storeId: this.state.storeId,
+        productId: this.props.match.params.productId,
+        state: 'wait'
+      })
+      .then((response) => {
+        console.log(response)
+        if (response.data.success) {
+          alert("Bạn đã đặt hàng thành công");
+          this.props.history.push('/order');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   handleSubmitComment(event) {
@@ -24,6 +45,7 @@ export default class SingleProduct extends Component {
         comment: data.get('comment')
       })
       .then((response) => {
+        alert('Bình luận thành công');
         this.componentDidMount();
       })
       .catch((error) => {
@@ -37,16 +59,19 @@ export default class SingleProduct extends Component {
       .then((response) => {
         console.log(response);
         this.setState((prevState, props) => {
-          var shopname
+          var shopname, shopId
           if (response.data.store) {
-            shopname = response.data.store.name
+            shopname = response.data.store.name;
+            shopId = response.data.store._id;
           } else {
             shopname = ""
+            shopId = ""
           }
           return {
             data: response.data.data,
             comments: response.data.data.comments,
-            name: shopname
+            name: shopname,
+            storeId: shopId
           }
         })
         console.log(this.state.name)
@@ -108,7 +133,7 @@ export default class SingleProduct extends Component {
                     {/* main slider carousel items */}
                     <div className="carousel-inner">
                       <div className="item carousel-item active" data-slide-number={0}>
-                        <img src="/images/blog-img1%20(1).jpg" alt="image" className="img-thumbnail img-responsive img-fluid w549" />
+                        <img src={this.state.data.image || "https://i.ytimg.com/vi/8DKD0o7sNug/maxresdefault.jpg"} alt="image" className="img-thumbnail img-responsive img-fluid w549" />
                       </div>
                     </div>
                     {/* main slider carousel nav controls */}
@@ -131,9 +156,8 @@ export default class SingleProduct extends Component {
                       </ul>
                     </div>
                     <div className="col-sm-12">
-                      <div className="cart" data-aos="fade-up" data-aos-duration={1500}>
-                        <a href="#" className="btn btn-info" role="button">ADD TO CART</a>
-                        <a href="#" className="btn btn-primary" role="button">BUY NOW</a>
+                      <div className="cart" style={{ bottom: 50 }} data-aos="fade-up" data-aos-duration={1500}>
+                        <button onClick={this.handleOrder} className="btn btn-info" role="button">Đặt Hàng Ngay</button>
                       </div>
                     </div>
                   </div>

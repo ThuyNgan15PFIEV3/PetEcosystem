@@ -35,7 +35,7 @@ export default class AllShop extends Component {
           </div>
           <div className="col-md-3">
             <figure>
-              <img href={'/stores/' + this.props.match.params.typeOfStore + '/' + store._id} src="/images/pete-3.jpg" alt="Web Design" width="100%" />
+              <img href={'/stores/' + this.props.match.params.typeOfStore + '/' + store._id} src={ store.image || "/images/pete-3.jpg"} alt="Web Design" width="100%" />
             </figure>
           </div>
           <div className="col-md-9">

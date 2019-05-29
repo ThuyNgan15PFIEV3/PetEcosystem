@@ -139,7 +139,7 @@ class RemoteAlternative extends React.Component {
         <TableHeaderColumn dataField='name'>Products Name</TableHeaderColumn>
         <TableHeaderColumn dataField='description'>Description</TableHeaderColumn>
         <TableHeaderColumn dataField='price'>Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='createdAt' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} >Created At</TableHeaderColumn>
+        <TableHeaderColumn dataField='image' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} >Image</TableHeaderColumn>
       </BootstrapTable>
     );
   }

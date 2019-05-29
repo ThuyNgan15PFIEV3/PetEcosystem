@@ -26,6 +26,15 @@ export default class Home extends Component {
       })
   }
   render() {
+    let addBlog
+    if (localStorage.getItem('username')) {
+      addBlog = <div>
+        <a href="/addBlog">
+          <button className="chr-cart pchr-cart">Thêm bài viết
+                  <i className="fa fa-pencil-square-o" aria-hidden="true" />
+          </button> </a>
+      </div>
+    }
     var listBlog = this.state.data.map(blog => (
       <div key={blog._id} className="col-xs-12 col-sm-6 col-md-6">
         <div className="thumbnail">
@@ -33,7 +42,7 @@ export default class Home extends Component {
             <h3><a href={'/blog/' + blog._id}>{blog.title}</a></h3>
             <p><span><a href={'/blog/' + blog._id}>read more...</a></span></p>
           </div>
-          <img src="/images/blog-2.jpg" className="img-responsive" alt="..." />
+          <img src={blog.image || "/images/blog-2.jpg"} className="img-responsive" alt="..." />
         </div>
       </div>
     ))
@@ -52,6 +61,7 @@ export default class Home extends Component {
         {/* Blog Section Start */}
         <section className="blog">
           <div className="container">
+            {addBlog}
             <div className="inner-content">
               <div className="row" data-aos="fade-right" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
                 {listBlog}
@@ -65,7 +75,7 @@ export default class Home extends Component {
           </div>{/* /.container */}
         </section>
         {/* Blog Section End */}
-        <Footer/>
+        <Footer />
       </div>
     );
   }

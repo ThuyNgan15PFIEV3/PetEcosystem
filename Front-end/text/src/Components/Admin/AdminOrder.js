@@ -4,7 +4,7 @@ import '../../CSS/admin.css';
 import axiosInstance from '../../helper/AxiosInstance';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-export default class AdminProducts extends Component {
+export default class AdminCategory extends Component {
 
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ export default class AdminProducts extends Component {
   }
 
   componentDidMount() {
-    axiosInstance.get('/posts').then(res => {
+    axiosInstance.get('/orders').then(res => {
       console.log(res.data.data);
       this.setState({
         data: res.data.data
@@ -41,9 +41,8 @@ export default class AdminProducts extends Component {
     this.setState({
       data: this.state.data
     });
-    axiosInstance.put('/posts/' + row['_id'], {
-      title: row['title'],
-      content: row['content'],
+    axiosInstance.put('/orders/' + row['_id'], {
+      state: row['state']
     }).then(res => {
       console.log(res);
       console.log('thanh cong');
@@ -53,10 +52,9 @@ export default class AdminProducts extends Component {
   }
 
   onAddRow = (row) => {
-    axiosInstance.post('/posts', {
-      title: row['title'],
-      content: row['content'],
-      belongToUser: localStorage.getItem('_id')
+    axiosInstance.post('/categories', {
+      name: row['name'],
+      description: row['description'],
     }).then(res => {
       console.log(res);
       this.state.data.push(res.data.data)
@@ -73,7 +71,7 @@ export default class AdminProducts extends Component {
     this.state.data = this.state.data.filter((product) => {
       return product._id !== row[0];
     });
-    axiosInstance.delete('/posts/' + row[0])
+    axiosInstance.delete('/categories/' + row[0])
       .then(res => {
         console.log("Da sua thanh cong");
       })
@@ -120,6 +118,12 @@ class RemoteAlternative extends React.Component {
       return cell.username;
     else return
   }
+
+  productnameFormatter(cell, row) {
+    if (typeof cell !== 'undefined')
+      return cell.name;
+    else return
+  }
   render() {
     const cellEditProp = {
       mode: 'click'
@@ -132,19 +136,17 @@ class RemoteAlternative extends React.Component {
       <BootstrapTable data={this.props.data}
         selectRow={selectRow}
         remote={this.remote}
-        insertRow deleteRow search
+        search
         cellEdit={cellEditProp}
         options={{
           onCellEdit: this.props.onCellEdit,
           onDeleteRow: this.props.onDeleteRow,
           onAddRow: this.props.onAddRow
         }}>
-        <TableHeaderColumn dataField='_id' hiddenOnInsert isKey={true}>Post ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='title'>Title</TableHeaderColumn>
-        <TableHeaderColumn dataField='content'>Content</TableHeaderColumn>
-        <TableHeaderColumn dataField='belongToUser' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} dataFormat={this.usernameFormatter}>BelongToUser</TableHeaderColumn>
-        <TableHeaderColumn dataField='image'>Image</TableHeaderColumn>
-
+        <TableHeaderColumn dataField='_id' hiddenOnInsert isKey={true}>Order ID</TableHeaderColumn>
+        <TableHeaderColumn dataField='belongToUser' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} dataFormat={this.usernameFormatter}>User Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='productId' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} dataFormat={this.productnameFormatter}>Product Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='state' editable={{ type: 'select', options: { values: ['complete', 'destroy', 'process', 'wait'] } }}>State</TableHeaderColumn>
       </BootstrapTable>
     );
   }

@@ -22,6 +22,7 @@ export default class SingleBlog extends Component {
         comment: data.get('comment')
       })
       .then((response) => {
+        alert('Bình luận thành công');
         this.componentDidMount();
       })
       .catch((error) => {
@@ -34,9 +35,15 @@ export default class SingleBlog extends Component {
       .get('/posts/' + this.props.match.params.blogId)
       .then((response) => {
         this.setState((prevState, props) => {
+          let postName
+          if (response.data.data.belongToUser) {
+            postName = response.data.data.belongToUser.name;
+          } else {
+            postName = 'Anonymous';
+          }
           return {
             data: response.data.data,
-            name: response.data.data.belongToUser.name,
+            name: postName,
             comments: response.data.data.comments
           }
         })

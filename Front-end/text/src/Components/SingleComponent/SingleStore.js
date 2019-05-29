@@ -30,6 +30,7 @@ export default class SingleStore extends Component {
         comment: data.get('comment')
       })
       .then((response) => {
+        alert('Bình luận thành công');
         this.componentDidMount();
       })
       .catch((error) => {
@@ -97,7 +98,7 @@ export default class SingleStore extends Component {
         <div className="col-sm-6 col-md-3 col">
           <div className="thumbnail">
             <figure className="image one">
-              <a href={'/products/' + product._id}><img src="/images/product-2.jpg" className="img-responsive" alt="Responsive image" /></a>
+              <a href={'/products/' + product._id}><img src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
             </figure>
             <div className="caption productdisplay">
               <h3><a href={'/products/' + product._id}>{product.name}</a></h3>
@@ -106,13 +107,16 @@ export default class SingleStore extends Component {
                 <h3>Giá: {product.price}</h3>
               </div>
               <a href={'/editproduct/' + product._id}>
-                <button onClick={event => this.handleDelete()} className="chr-cart pchr-cart">Edit
+                <button className="chr-cart pchr-cart">Edit
                   <i className="fa fa-pencil-square-o" aria-hidden="true" />
                 </button> </a>
-
-              <button onClick={event => this.handleDelete(product._id, event)} className="chr-cart pchr-cart">delete
+              <div>
+                <button onClick={event => this.handleDelete(product._id, event)} className="chr-cart pchr-cart">delete
               <i className="fa fa-trash" aria-hidden="true" />
-              </button>
+                </button>
+              </div>
+
+
             </div>
           </div>
         </div >
@@ -122,7 +126,7 @@ export default class SingleStore extends Component {
         <div className="col-sm-6 col-md-3 col">
           <div className="thumbnail">
             <figure className="image one">
-              <a href={'/products/' + product._id}><img src="/images/product-2.jpg" className="img-responsive" alt="Responsive image" /></a>
+              <a href={'/products/' + product._id}><img src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
             </figure>
             <div className="caption">
               <h3><a href={'/products/' + product._id}>{product.name}</a></h3>

@@ -15,6 +15,7 @@ import Stores from './Components/Section/Stores';
 import AdminStores from './Components/Admin/AdminStores';
 import MyStore from './Components/Section/MyStore';
 import AddProduct from './Components/SingleComponent/AddProduct';
+import Order from './Components/Section/Order';
 
 import './App.css';
 import Users from './Components/Admin/Users';
@@ -24,6 +25,8 @@ import AdminComments from './Components/Admin/AdminComments';
 import Admin from './Components/Admin/Admin';
 import EditProduct from './Components/SingleComponent/EditProduct';
 import AdminCategory from './Components/Admin/AdminCategory';
+import AdminOrders from './Components/Admin/AdminOrder';
+import AddBlog from './Components/SingleComponent/AddBlog';
 
 function App() {
   return (
@@ -40,10 +43,13 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/mystore" component={MyStore} />
+          <Route exact path="/order" component={Order} />
 
           <Route path="/blog/:blogId" component={SingleBlog} />
           <Route path="/products/:productId" component={SingleProduct} />
           <Route path="/addproduct" component={AddProduct} />
+          <Route path="/addblog" component={AddBlog} />
+
           <Route path="/editproduct/:productId" component={EditProduct} />
 
           <Route exact path="/admin/users" component={Users} />
@@ -52,6 +58,7 @@ function App() {
           <Route exact path="/admin/posts" component={AdminPosts} />
           <Route exact path="/admin/comments" component={AdminComments} />
           <Route exact path="/admin/category" component={AdminCategory} />
+          <Route exact path="/admin/orders" component={AdminOrders} />
 
           <Route exact path="/admin" component={Admin} />
 

@@ -45,7 +45,8 @@ export default class Users extends Component {
       name: row['name'],
       description: row['description'],
       address: row['address'],
-      typeOfStore: row['typeOfStore']
+      typeOfStore: row['typeOfStore'],
+      image: row['image']
     }
     console.log(body);
     axiosInstance.put('/stores/detail/' + row['_id'], body).then(res => {
@@ -144,6 +145,8 @@ class RemoteAlternative extends React.Component {
         <TableHeaderColumn dataField='name'>Stores Name</TableHeaderColumn>
         <TableHeaderColumn dataField='description'>Description</TableHeaderColumn>
         <TableHeaderColumn dataField='address'>Address</TableHeaderColumn>
+        <TableHeaderColumn dataField='image'>Image</TableHeaderColumn>
+
         <TableHeaderColumn dataField='typeOfStore' multiple={true}
           editable={{ type: 'select', options: { values: ['normal', 'beauty', 'training', 'care'] } }}>Type Of Stores</TableHeaderColumn>
       </BootstrapTable>

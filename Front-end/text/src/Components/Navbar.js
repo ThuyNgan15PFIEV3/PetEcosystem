@@ -8,9 +8,13 @@ export default class Navbar extends Component {
 
     const isLoggedIn = localStorage.getItem('username');
     console.log(isLoggedIn);
+    let order;
     let username;
     if (isLoggedIn) {
-
+      order = <li><a title="Bạn có thể kiểm tra đơn đặt hàng ở đây" href="/order">
+        <i className="fa fa-cart-arrow-down" aria-hidden="true" />
+      </a>
+      </li>
       username = <li><a href="/logout">Log out</a></li>
     }
     else {
@@ -45,11 +49,13 @@ export default class Navbar extends Component {
                 <ul className="nav navbar-nav navbar-right">
                   <li><a href="/"><i className="fa fa-home" aria-hidden="true" /> <span className="sr-only">(current)</span></a></li>
                   {adminpage}
-                  <li><a href="/shop">Shop </a></li>
-                  <li><a href="/stores">stores </a></li>
-                  <li><a href="/blog">Blog </a></li>
-                  <li><a href="/mystore">My Store </a></li>
+                  <li><a title="Xem thông tin các sản phẩm mới tại đây" href="/shop">Shop </a></li>
+                  <li><a title="Xem thông tin các cửa hàng tại đây" href="/stores">stores </a></li>
+                  <li><a title="Xem các bài viết hữu ích tại đây" href="/blog">Blog </a></li>
+                  <li><a title="Quản lý cửa hàng của bạn tại đây" href="/mystore">My Store </a></li>
                   {username}
+                  {order}
+
                 </ul>
               </div>{/* /.navbar-collapse */}
             </div>{/* /.container*/}

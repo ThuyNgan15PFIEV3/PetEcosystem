@@ -127,7 +127,7 @@ export default class Shop extends Component {
       <div className="col-sm-6 col-md-3 col">
         <div className="thumbnail">
           <figure className="image one">
-            <a href={'/products/' + product._id}><img src="/images/product-2.jpg" className="img-responsive" alt="Responsive image" /></a>
+            <a href={'/products/' + product._id}><img src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
           </figure>
           <div className="caption productdisplay">
             <h3><a href="product_single.html">{product.name}</a></h3>

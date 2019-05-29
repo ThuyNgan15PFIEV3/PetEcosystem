@@ -38,7 +38,8 @@ export default class SingleStore extends Component {
       name: data.get('name'),
       description: data.get('description'),
       price: data.get('price'),
-      category: data.get('category')
+      category: data.get('category'),
+      image: data.get('image')
     }
     console.log(body)
     axiosInstance.post('/stores/detail/' + localStorage.getItem('myStore') + '/products', body)
@@ -79,11 +80,14 @@ export default class SingleStore extends Component {
               <input type="text" name="description" placeholder="Hãy nhập mô tả ..." required />
               <label htmlFor="lname">Giá</label>
               <input type="text" name="price" placeholder="Hãy nhập giá sản phẩm ..." required />
+              <label for="country">Hình ảnh sản phẩm</label>
+              <input type="text" name="image" placeholder="Hãy nhập Link ảnh..." required />
               <label for="country">Phân loại sản phẩm</label>
               <select id="country" name="category">
                 {listCategories}
               </select>
               <input type="submit" defaultValue="Submit" />
+
             </form>
 
           </div>{/* /.container */}
