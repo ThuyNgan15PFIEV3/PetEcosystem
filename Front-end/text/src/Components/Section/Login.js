@@ -12,11 +12,6 @@ export default class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this)
   }
 
-  // UNSAFE_componentWillMount() {
-  //   if (localStorage.getItem('username')) {
-  //     return this.props.history.push('/shop');
-  //   }
-  // }
 
   handleLogin(event) {
     event.preventDefault();
@@ -28,17 +23,14 @@ export default class Login extends Component {
     }).then((response) => {
       console.log(response);
       if (response.data.success) {
-        // console.log(response.data.data.id);
-        // console.log(response.data.data.token);
-        // console.log(response.data.data.username);
-        // console.log(response.data.data.role);
         localStorage.setItem('userId', response.data.data.id);
 
         localStorage.setItem('token', response.data.data.token);
         localStorage.setItem('username', response.data.data.username);
         localStorage.setItem('role', response.data.data.role);
         alert("Login Succesful");
-        // window.location.reload();
+        this.props.history.push('/');
+        window.location.reload();
       } else {
         alert(response.data.error);
       }

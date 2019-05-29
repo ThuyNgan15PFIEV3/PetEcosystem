@@ -3,18 +3,29 @@ import { Link } from 'react-router-dom';
 import '../CSS/Product.css';
 
 export default class Navbar extends Component {
+  constructor(props) {
+    super(props)
+    this.handleLogout = this.handleLogout.bind(this)
+  }
 
+  handleLogout(event) {
+    event.preventDefault();
+    try {
+      localStorage.clear();
+      window.location.reload();
+    } catch(e) {
+      console.log(e);
+    }
+  }
   render() {
-
-    const isLoggedIn = localStorage.getItem('username');
+    const isLoggedIn = localStorage.getItem('token');
     console.log(isLoggedIn);
-    let username;
-    if (isLoggedIn) {
-
-      username = <li><a href="/logout">Log out</a></li>
+    let logout;
+    if (isLoggedIn) {    
+      logout = <li><a href="/login"  onClick={(event) => (this.handleLogout(event))}>Log out</a></li>
     }
     else {
-      username = <li><a href="/logout">Log in</a></li>
+      logout = <li><a href="/login" >Log in</a></li>
     }
     let adminpage;
     const isAdmin = localStorage.getItem('isAdmin');
@@ -49,7 +60,7 @@ export default class Navbar extends Component {
                   <li><a href="/stores">stores </a></li>
                   <li><a href="/blog">Blog </a></li>
                   <li><a href="/mystore">My Store </a></li>
-                  {username}
+                  {logout}
                 </ul>
               </div>{/* /.navbar-collapse */}
             </div>{/* /.container*/}
