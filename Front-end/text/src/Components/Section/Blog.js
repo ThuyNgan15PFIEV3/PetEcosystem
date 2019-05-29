@@ -68,11 +68,6 @@ export default class Home extends Component {
               <div className="row" data-aos="fade-right" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
                 {listBlog}
               </div>
-
-              <div className="products-display">
-                <a href="#" className="previous">Previous</a>
-                <a href="#" className="next">Next</a>
-              </div>
             </div>
           </div>{/* /.container */}
         </section>

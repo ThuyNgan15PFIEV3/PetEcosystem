@@ -22,7 +22,9 @@ export default class Navbar extends Component {
     console.log(isLoggedIn);
     let order;
     let logout;
+    let username;
     if (isLoggedIn) {
+      username = localStorage.getItem('username');
       order = <li><a title="Bạn có thể kiểm tra đơn đặt hàng ở đây" href="/order">
         <i className="fa fa-cart-arrow-down" aria-hidden="true" />
       </a>
@@ -44,7 +46,7 @@ export default class Navbar extends Component {
       <div>
         <header className="header">
           {/* nav */}
-          <nav className="navbar navbar-default navbar-fixed-top">
+          <nav style={{ height: "70px" }} className="navbar navbar-default navbar-fixed-top">
             <div className="container">
               {/* Brand and toggle get grouped for better mobile display */}
               <div className="navbar-header">
@@ -59,6 +61,9 @@ export default class Navbar extends Component {
               {/* Collect the nav links and other content for toggling */}
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav navbar-right">
+                  <li>
+                    <p >Xin Chào {username}</p>
+                  </li>
                   <li><a href="/"><i className="fa fa-home" aria-hidden="true" /> <span className="sr-only">(current)</span></a></li>
                   {adminpage}
                   <li><a title="Xem thông tin các sản phẩm mới tại đây" href="/shop">Shop </a></li>

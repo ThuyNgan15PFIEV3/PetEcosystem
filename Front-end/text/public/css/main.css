@@ -62,6 +62,16 @@ textarea {resize: none;}
     font-weight: 400;
     text-transform: uppercase;
 }
+
+.navbar-default .navbar-nav>li>p {
+    color: #362f2d;
+    font-size: 15px;
+    text-align: center;
+    padding: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
 .navbar-default .navbar-nav>li>a:hover {
     color: #fff;
     background-color: #ff9700;
