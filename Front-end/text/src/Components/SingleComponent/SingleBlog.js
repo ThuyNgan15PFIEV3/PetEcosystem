@@ -37,7 +37,8 @@ export default class SingleBlog extends Component {
         this.setState((prevState, props) => {
           let postName
           if (response.data.data.belongToUser) {
-            postName = response.data.data.belongToUser.name;
+            console.log(response.data.data)
+            postName = response.data.data.belongToUser.username;
           } else {
             postName = 'Anonymous';
           }
@@ -65,7 +66,7 @@ export default class SingleBlog extends Component {
       return (
         <div className="review-content">
           <h6>{name}&nbsp;/
-        <span>{comment.createdAt}</span>
+        <span>{new Date(comment.createdAt).toString()}</span>
           </h6>
           <p>{comment.comment}</p>
         </div>
@@ -93,7 +94,7 @@ export default class SingleBlog extends Component {
               <div className="row">
                 <div className="col-sm-7 col-md-6">
                   <div className="inner-text">
-                    <h3>{this.state.data.createdAt} Posted by <span>{this.state.name}</span></h3>
+                    <h3>{new Date(this.state.data.createdAt).toString()} Posted by <span>{this.state.name}</span></h3>
                   </div>
                 </div>
               </div>

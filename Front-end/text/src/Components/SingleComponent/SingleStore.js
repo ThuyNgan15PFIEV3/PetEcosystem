@@ -59,8 +59,9 @@ export default class SingleStore extends Component {
         console.log(response);
         this.setState((prevState, props) => {
           var username
+
           if (response.data.data.belongToUser) {
-            username = response.data.data.belongToUser.name
+            username = response.data.data.belongToUser.username
           } else {
             username = ""
           }
@@ -152,8 +153,8 @@ export default class SingleStore extends Component {
               }} src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
             </figure>
             <div className="caption">
-              <h3><a href={'/products/' + product._id}>{product.name}</a></h3>
-              <p>{product.description}</p>
+              <h3 className="productdisplay"><a title={product.name} href={'/products/' + product._id}>{product.name}</a></h3>
+              <p className="productdisplay">{product.description}</p>
               <div className="box">
                 <h3>Giá: {product.price}</h3>
               </div>
@@ -173,7 +174,7 @@ export default class SingleStore extends Component {
       return (
         <div className="review-content">
           <h6>{name}&nbsp;/
-        <span>{comment.createdAt}</span>
+        <span>{new Date(comment.createdAt).toString()}</span>
           </h6>
           <p>{comment.comment}</p>
         </div>
@@ -205,7 +206,7 @@ export default class SingleStore extends Component {
               <div className="row">
                 <div className="col-sm-7 col-md-6">
                   <div className="inner-text">
-                    <h3>{this.state.data.createdAt} Created by <span>{this.state.name}</span></h3>
+                    <h3>{new Date(this.state.data.createdAt).toString()} Created by <span>{this.state.name}</span></h3>
                   </div>
                 </div>
               </div>

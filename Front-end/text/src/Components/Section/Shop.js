@@ -132,11 +132,13 @@ export default class Shop extends Component {
               height: "200px"
             }} src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
           </figure>
-          <div className="caption productdisplay">
-            <h3><a href="product_single.html">{product.name}</a></h3>
-            <p>{product.description}</p>
+          <div className="caption">
+            <h3 className="productdisplay"><a title={product.name} href={'/products/' + product._id}>{product.name}</a></h3>
+            <p className="productdisplay"> {product.description}</p>
             <div className="box">
-              <h3>Giá: {product.price}</h3>
+              <h3 style={{
+                padding: "10px"
+              }}>Giá: {product.price}</h3>
             </div>
           </div>
         </div>

@@ -97,7 +97,7 @@ export default class SingleProduct extends Component {
       return (
         <div className="review-content">
           <h6>{name}&nbsp;/
-        <span>{comment.createdAt}</span>
+        <span>{new Date(comment.createdAt).toString()}</span>
           </h6>
           <p>{comment.comment}</p>
         </div>
