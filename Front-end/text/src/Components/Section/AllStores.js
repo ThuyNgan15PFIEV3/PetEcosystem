@@ -28,25 +28,37 @@ export default class AllShop extends Component {
 
   render() {
     var listStores = this.state.data.map(store => (
-      <div className="part-1">
-        <div className="row">
-          <div className="col-md-12 heading">
-            <h3>{store.name}</h3>
+      <div className="col-xs-12 col-sm-6 col-md-6">
+        <div className="part-1">
+          <div style={{
+            padding: "15px",
+          }} className="row">
+            <div className="col-md-12 heading">
+              <a href={'/stores/detail/' + store._id}>
+                <h3>{store.name}</h3>
+              </a>
+            </div>
+            <div className="col-md-6">
+              <a href={'/stores/detail/' + store._id}>
+                <img href={'/stores/' + this.props.match.params.typeOfStore + '/' + store._id} src={store.image || "/images/pete-3.jpg"} alt="Web Design" width="100%" />
+              </a>
+            </div>
+            <div className="col-md-6">
+              <p>Mô Tả: {store.description}</p>
+            </div>
+            <div className="col-md-6">
+              <p>Địa Chỉ: {store.address}</p>
+            </div>
+            <div>
+              <a href={'/stores/detail/' + store._id}>
+                <button className="chr-cart pchr-cart">Xem chi tiết cửa hàng
+                <i class="fa fa-info" aria-hidden="true"></i>
+                </button> </a>
+            </div>
           </div>
-          <div className="col-md-3">
-            <figure>
-              <img href={'/stores/' + this.props.match.params.typeOfStore + '/' + store._id} src={ store.image || "/images/pete-3.jpg"} alt="Web Design" width="100%" />
-            </figure>
-          </div>
-          <div className="col-md-9">
-            <p>Mô Tả: {store.description}</p>
-          </div>
-          <div className="col-md-9">
-            <p>Địa Chỉ: {store.address}</p>
-          </div>
-          <button><a href={'/stores/detail/' + store._id}> xem chi tiết</a></button>
         </div>
       </div>
+
     ))
     return (
       <div>

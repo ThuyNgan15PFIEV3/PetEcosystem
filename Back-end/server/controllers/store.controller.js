@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Store = mongoose.model('Store');
 const Production = mongoose.model('Production');
 const Comment = mongoose.model('Comment');
+const Order = mongoose.model('Order');
 exports.create = async (req, res) => {
   try {
     if (!req.body) {
@@ -67,16 +68,16 @@ exports.update = async (req, res) => {
   try {
     console.log(req.params.storeId);
     await Store.findByIdAndUpdate(req.params.storeId, req.body, { new: true }, (err, data) => {
-        console.log(data);
-        if (err) return res.status(400).json({
-          success: false,
-          error: err.message
-        });
-        return res.status(200).json({
-          success: true,
-          data: data
-        });
-      })
+      console.log(data);
+      if (err) return res.status(400).json({
+        success: false,
+        error: err.message
+      });
+      return res.status(200).json({
+        success: true,
+        data: data
+      });
+    })
   } catch (err) {
     return res.status(500).send({
       message:
@@ -171,5 +172,20 @@ exports.findAllStoreByType = async (req, res) => {
       message:
         err.message || "Some error occurred while load stores"
     })
+  }
+}
+
+exports.getAllOrder = async (req, res) => {
+  try {
+    const orders = await Order.find({ storeId: req.params.storeId }).populate('userId', ['username', 'address']).populate('productId', ['name', 'image']);
+    return res.status(200).json({
+      success: true,
+      data: orders
+    })
+  } catch (err) {
+    return res.status(500).send({
+      message:
+        err.message || "Some error occurred while finding the Orders."
+    });
   }
 }

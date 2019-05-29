@@ -129,6 +129,8 @@ class RemoteAlternative extends React.Component {
         selectRow={selectRow}
         remote={this.remote}
         insertRow deleteRow search
+        pagination
+
         cellEdit={cellEditProp}
         options={{
           onCellEdit: this.props.onCellEdit,

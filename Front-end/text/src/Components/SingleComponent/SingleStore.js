@@ -56,6 +56,7 @@ export default class SingleStore extends Component {
     axiosInstance
       .get('/stores/detail/' + this.props.match.params.storeId)
       .then((response) => {
+        console.log(response);
         this.setState((prevState, props) => {
           var username
           if (response.data.data.belongToUser) {
@@ -80,12 +81,30 @@ export default class SingleStore extends Component {
     var myStore = localStorage.getItem('myStore')
     let addProduct
     let listProducts
-    if (this.props.match.params.storeId == myStore) {
+    let checkOrder
+    if (this.props.match.params.storeId === myStore) {
+      checkOrder = (
+        <a href="/addBlog">
+          <button style={{
+            position: "absolute",
+            width: "25%",
+            right: "45px",
+            top: "400px"
+          }} className="chr-cart pchr-cart">Kiểm Tra Đơn Hàng
+          <i class="fa fa-list-alt" aria-hidden="true"></i>
+          </button> </a>
+      )
       addProduct = (
-        <div className="col-sm-6 col-md-3 col">
+        <div style={{
+          width: "262.5px",
+          height: "454.318px"
+        }} className="col-sm-6 col-md-3 col">
           <div className="thumbnail">
             <figure className="image one">
-              <a href={'/addproduct'}><img src="/images/add.jpg" className="img-responsive" alt="Responsive image" /></a>
+              <a href={'/addproduct'}><img style={{
+                width: "100%",
+                height: "200px"
+              }} src="/images/add.jpg" className="img-responsive" alt="Responsive image" /></a>
             </figure>
             <div className="caption">
               <h3><a href="/products/addproducts">Bấm vào đây để thêm sản phẩm</a></h3>
@@ -98,7 +117,10 @@ export default class SingleStore extends Component {
         <div className="col-sm-6 col-md-3 col">
           <div className="thumbnail">
             <figure className="image one">
-              <a href={'/products/' + product._id}><img src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
+              <a href={'/products/' + product._id}><img style={{
+                width: "100%",
+                height: "200px"
+              }} src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
             </figure>
             <div className="caption productdisplay">
               <h3><a href={'/products/' + product._id}>{product.name}</a></h3>
@@ -115,8 +137,6 @@ export default class SingleStore extends Component {
               <i className="fa fa-trash" aria-hidden="true" />
                 </button>
               </div>
-
-
             </div>
           </div>
         </div >
@@ -126,7 +146,10 @@ export default class SingleStore extends Component {
         <div className="col-sm-6 col-md-3 col">
           <div className="thumbnail">
             <figure className="image one">
-              <a href={'/products/' + product._id}><img src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
+              <a href={'/products/' + product._id}><img style={{
+                width: "100%",
+                height: "200px"
+              }} src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
             </figure>
             <div className="caption">
               <h3><a href={'/products/' + product._id}>{product.name}</a></h3>
@@ -173,7 +196,11 @@ export default class SingleStore extends Component {
           <div className="container">
             <div className="heading">
               <h2>{this.state.data.name}</h2>
+              <br />
+              <h3>{this.state.data.address}</h3>
             </div>
+            {checkOrder}
+
             <div className="social-buttons" data-aos="fade-up" data-aos-duration={500}>
               <div className="row">
                 <div className="col-sm-7 col-md-6">
@@ -181,31 +208,20 @@ export default class SingleStore extends Component {
                     <h3>{this.state.data.createdAt} Created by <span>{this.state.name}</span></h3>
                   </div>
                 </div>
-                <div className="col-sm-5 col-md-6">
-                  <ul className="mbm_social">
-                    <li><a className="social-facebook" href="#">
-                      <i className="fa fa-facebook"><small>1.2m</small></i>
-                      <div className="tooltip"><span>facebook</span></div>
-                    </a>
-                    </li>
-                    <li><a className="social-twitter" href="#">
-                      <i className="fa fa-twitter"><small>448.6k</small></i>
-                      <div className="tooltip"><span>Twitter</span></div>
-                    </a>
-                    </li>
-                    <li><a className="social-google-plus" href="#">
-                      <i className="fa fa-google-plus"><small>111.7k</small></i>
-                      <div className="tooltip"><span>google</span></div>
-                    </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </div>
             <div className="contant">
               <div className="row" style={{ marginRight: 0, marginLeft: 0 }} data-aos="fade-up" data-aos-duration={500}>
-                <img src={this.state.data.image || "/images/blog-single.jpg"} alt="test" className="img-thumbnail img-responsive image" />
-                <p>{this.state.data.description} </p>
+                <img style={{
+                  width: "50%",
+                  height: "50%",
+                  float: "left"
+                }} src={this.state.data.image || "/images/blog-single.jpg"} alt="test" className="img-thumbnail img-responsive image" />
+                <p style={{
+                  left: "54%",
+                  float: "right",
+                  position: "absolute",
+                }}>{this.state.data.description} </p>
               </div>
             </div>
             <section id="product">
@@ -215,10 +231,6 @@ export default class SingleStore extends Component {
                   <div className="row" data-aos="fade-up" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
                     {addProduct}
                     {listProducts}
-                  </div>
-                  <div className="products-display">
-                    <a href="#" className="previous">Previous</a>
-                    <a href="#" className="next">Next</a>
                   </div>
                 </div>
                 {/* Inner-content End */}

@@ -3,25 +3,37 @@ import { Link } from 'react-router-dom';
 import '../CSS/Product.css';
 
 export default class Navbar extends Component {
+  constructor(props) {
+    super(props)
+    this.handleLogout = this.handleLogout.bind(this)
+  }
 
+  handleLogout(event) {
+    event.preventDefault();
+    try {
+      localStorage.clear();
+      window.location.reload();
+    } catch (e) {
+      console.log(e);
+    }
+  }
   render() {
-
-    const isLoggedIn = localStorage.getItem('username');
+    const isLoggedIn = localStorage.getItem('token');
     console.log(isLoggedIn);
     let order;
-    let username;
+    let logout;
     if (isLoggedIn) {
       order = <li><a title="Bạn có thể kiểm tra đơn đặt hàng ở đây" href="/order">
         <i className="fa fa-cart-arrow-down" aria-hidden="true" />
       </a>
       </li>
-      username = <li><a href="/logout">Log out</a></li>
+      logout = <li><a href="/login" onClick={(event) => (this.handleLogout(event))}>Log out</a></li>
     }
     else {
-      username = <li><a href="/logout">Log in</a></li>
+      logout = <li><a href="/login" >Log in</a></li>
     }
     let adminpage;
-    const isAdmin = localStorage.getItem('isAdmin');
+    const isAdmin = localStorage.getItem('role') === 'admin';
 
     if (isAdmin) {
       adminpage = <li><a href="/admin">Admin</a></li>
@@ -53,7 +65,7 @@ export default class Navbar extends Component {
                   <li><a title="Xem thông tin các cửa hàng tại đây" href="/stores">stores </a></li>
                   <li><a title="Xem các bài viết hữu ích tại đây" href="/blog">Blog </a></li>
                   <li><a title="Quản lý cửa hàng của bạn tại đây" href="/mystore">My Store </a></li>
-                  {username}
+                  {logout}
                   {order}
 
                 </ul>

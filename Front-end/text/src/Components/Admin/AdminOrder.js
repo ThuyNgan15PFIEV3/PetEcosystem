@@ -71,7 +71,7 @@ export default class AdminCategory extends Component {
     this.state.data = this.state.data.filter((product) => {
       return product._id !== row[0];
     });
-    axiosInstance.delete('/categories/' + row[0])
+    axiosInstance.delete('/orders/' + row[0])
       .then(res => {
         console.log("Da sua thanh cong");
       })
@@ -114,14 +114,14 @@ class RemoteAlternative extends React.Component {
     return remoteObj;
   }
   usernameFormatter(cell, row) {
-    if (typeof cell !== 'undefined')
+    if (typeof cell !== 'undefined' && cell !== null)
       return cell.username;
     else return
   }
 
   productnameFormatter(cell, row) {
-    if (typeof cell !== 'undefined')
-      return cell.name;
+    if (typeof cell !== 'undefined' && cell !== null)
+      return cell.name
     else return
   }
   render() {
@@ -137,6 +137,9 @@ class RemoteAlternative extends React.Component {
         selectRow={selectRow}
         remote={this.remote}
         search
+        deleteRow
+        pagination
+
         cellEdit={cellEditProp}
         options={{
           onCellEdit: this.props.onCellEdit,
@@ -144,7 +147,7 @@ class RemoteAlternative extends React.Component {
           onAddRow: this.props.onAddRow
         }}>
         <TableHeaderColumn dataField='_id' hiddenOnInsert isKey={true}>Order ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='belongToUser' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} dataFormat={this.usernameFormatter}>User Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='userId' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} dataFormat={this.usernameFormatter}>User Name</TableHeaderColumn>
         <TableHeaderColumn dataField='productId' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} dataFormat={this.productnameFormatter}>Product Name</TableHeaderColumn>
         <TableHeaderColumn dataField='state' editable={{ type: 'select', options: { values: ['complete', 'destroy', 'process', 'wait'] } }}>State</TableHeaderColumn>
       </BootstrapTable>

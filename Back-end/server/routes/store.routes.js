@@ -21,6 +21,9 @@ module.exports = (app) => {
     .delete(storeController.delete);
   app
     .route('/stores/detail/:storeId/products')
-    .post(storeController.addProduct)
+    .post(storeController.addProduct);
 
+  app
+    .route('/stores/:storeId/orders')
+    .get(storeController.getAllOrder);
 }

@@ -27,6 +27,7 @@ import EditProduct from './Components/SingleComponent/EditProduct';
 import AdminCategory from './Components/Admin/AdminCategory';
 import AdminOrders from './Components/Admin/AdminOrder';
 import AddBlog from './Components/SingleComponent/AddBlog';
+import CheckOrder from './Components/SingleComponent/CheckOrder';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/products/:productId" component={SingleProduct} />
           <Route path="/addproduct" component={AddProduct} />
           <Route path="/addblog" component={AddBlog} />
+          <Route path="/checkOrder" component={CheckOrder} />
 
           <Route path="/editproduct/:productId" component={EditProduct} />
 

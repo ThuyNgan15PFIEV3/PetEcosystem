@@ -30,7 +30,9 @@ export default class Home extends Component {
     if (localStorage.getItem('username')) {
       addBlog = <div>
         <a href="/addBlog">
-          <button className="chr-cart pchr-cart">Thêm bài viết
+          <button style={{
+            width: "25%"
+          }} className="chr-cart pchr-cart">Thêm bài viết
                   <i className="fa fa-pencil-square-o" aria-hidden="true" />
           </button> </a>
       </div>

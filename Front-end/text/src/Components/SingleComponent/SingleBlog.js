@@ -96,31 +96,20 @@ export default class SingleBlog extends Component {
                     <h3>{this.state.data.createdAt} Posted by <span>{this.state.name}</span></h3>
                   </div>
                 </div>
-                <div className="col-sm-5 col-md-6">
-                  <ul className="mbm_social">
-                    <li><a className="social-facebook" href="#">
-                      <i className="fa fa-facebook"><small>1.2m</small></i>
-                      <div className="tooltip"><span>facebook</span></div>
-                    </a>
-                    </li>
-                    <li><a className="social-twitter" href="#">
-                      <i className="fa fa-twitter"><small>448.6k</small></i>
-                      <div className="tooltip"><span>Twitter</span></div>
-                    </a>
-                    </li>
-                    <li><a className="social-google-plus" href="#">
-                      <i className="fa fa-google-plus"><small>111.7k</small></i>
-                      <div className="tooltip"><span>google</span></div>
-                    </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </div>
             <div className="contant">
               <div className="row" style={{ marginRight: 0, marginLeft: 0 }} data-aos="fade-up" data-aos-duration={500}>
-                <img src={this.state.data.image || "/images/blog-single.jpg"} alt="test" className="img-thumbnail img-responsive image" />
-                <p>{this.state.data.content} </p>
+                <img style={{
+                  width: "50%",
+                  height: "50%",
+                  float: "left"
+                }} src={this.state.data.image || "/images/blog-single.jpg"} alt="test" className="img-thumbnail img-responsive image" />
+                <p style={{
+                  left: "54%",
+                  float: "right",
+                  position: "absolute",
+                }}>{this.state.data.content} </p>
               </div>
             </div>
             <section className="review">

@@ -82,7 +82,7 @@ export default class AdminComments extends Component {
             {...this.state} />
         </div>
 
-      </div>
+      </div >
 
     );
   }
@@ -118,6 +118,8 @@ class RemoteAlternative extends React.Component {
         selectRow={selectRow}
         remote={this.remote}
         deleteRow search
+        pagination
+
         cellEdit={cellEditProp}
         options={{
           onCellEdit: this.props.onCellEdit,

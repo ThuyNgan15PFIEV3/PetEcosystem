@@ -56,7 +56,7 @@ export default class AdminProducts extends Component {
     axiosInstance.post('/posts', {
       title: row['title'],
       content: row['content'],
-      belongToUser: localStorage.getItem('_id')
+      belongToUser: localStorage.getItem('userId')
     }).then(res => {
       console.log(res);
       this.state.data.push(res.data.data)
@@ -133,6 +133,8 @@ class RemoteAlternative extends React.Component {
         selectRow={selectRow}
         remote={this.remote}
         insertRow deleteRow search
+        pagination
+
         cellEdit={cellEditProp}
         options={{
           onCellEdit: this.props.onCellEdit,

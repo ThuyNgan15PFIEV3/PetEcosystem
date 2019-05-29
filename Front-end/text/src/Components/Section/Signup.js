@@ -4,6 +4,65 @@ import '../../CSS/Login.css';
 import NavBar from '../Navbar';
 import Footer from '../Footer';
 export default class Signup extends Component {
+  constructor() {
+    super();
+    this.state = {
+        email: '',
+        username: '',
+        address:'',
+        password:'',
+        errors: {}
+    }
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+
+    this.handleSignup = this.handleSignup.bind(this); 
+  }
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value
+    });
+  }
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value
+    })  
+  }
+  onChangeAddress(e) {
+    this.setState({
+      address: e.target.value
+    })
+  }
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value
+    })
+  }
+  
+  async handleSignup(e) {
+    e.preventDefault();
+    const obj = {
+      email: this.state.email,
+      username: this.state.username,
+      address: this.state.address,
+      password: this.state.password,
+      role: 'normal'
+    };
+    const data = await fetch('http://localhost:4000/user/register', {
+            method: 'POST',
+            body: JSON.stringify(obj),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        }); 
+
+    const response = data.json();
+    console.log(response);
+    alert('Create success');
+    this.props.history.push('/login');
+  }
   render() {
     return (
       <div>
@@ -41,25 +100,53 @@ export default class Signup extends Component {
                         <div className="form-group">
                           <label className="col-md-3 col-sm-3 col-xs-3 control-label">Email</label>
                           <div className="col-md-9 col-sm-9 col-xs-9">
-                            <input type="email" className="form-control" name="email" placeholder="Email Address" required />
+                            <input 
+                            type="email" 
+                            className="form-control" 
+                            name="email" 
+                            placeholder="Email Address" 
+                            value={this.state.email}
+                            onChange={this.onChangeEmail}
+                            required />
                           </div>
                         </div>
                         <div className="form-group">
-                          <label className="col-md-3 col-sm-3 col-xs-3 control-label">First Name</label>
+                          <label className="col-md-3 col-sm-3 col-xs-3 control-label">Username</label>
                           <div className="col-md-9 col-sm-9 col-xs-9">
-                            <input type="text" className="form-control" name="firstname" placeholder="First Name" required />
+                            <input 
+                            type="text" 
+                            className="form-control" 
+                            name="username" 
+                            placeholder="User Name" 
+                            value={this.state.username}
+                            onChange={this.onChangeUsername}
+                            required />
                           </div>
                         </div>
                         <div className="form-group">
-                          <label className="col-md-3 col-sm-3 col-xs-3 control-label">Last Name</label>
+                          <label className="col-md-3 col-sm-3 col-xs-3 control-label">Address</label>
                           <div className="col-md-9 col-sm-9 col-xs-9">
-                            <input type="text" className="form-control" name="lastname" placeholder="Last Name" required />
+                            <input 
+                            type="text" 
+                            className="form-control" 
+                            name="address" 
+                            placeholder="Address"
+                            value={this.state.address}
+                            onChange={this.onChangeAddress} 
+                            required />
                           </div>
                         </div>
                         <div className="form-group">
                           <label className="col-md-3 col-sm-3 col-xs-3 control-label">Password</label>
                           <div className="col-md-9 col-sm-9 col-xs-9">
-                            <input type="password" className="form-control" name="password" placeholder="Password" required />
+                            <input 
+                            type="password" 
+                            className="form-control" 
+                            name="password" 
+                            placeholder="Password" 
+                            value={this.state.password}
+                            onChange={this.onChangePassword}
+                            required />
                           </div>
                         </div>
                         <div className="form-group">

@@ -67,14 +67,14 @@ export default class Shop extends Component {
         break;
       case '3':
         products.sort((a, b) => {
-          var priceA = a.price.replace('.', ''), priceB = b.price.replace('.', '');
+          var priceA = a.price.replace(/\./g, ''), priceB = b.price.replace(/\./g, '');
           console.log(parseInt(priceA, 10));
           return priceA - priceB;
         });
         break;
       case '4':
         products.sort((a, b) => {
-          var priceA = a.price.replace('.', ''), priceB = b.price.replace('.', '');
+          var priceA = a.price.replace(/\./g, ''), priceB = b.price.replace(/\./g, '');
           console.log(parseInt(priceA, 10));
           return priceA - priceB;
         }).reverse();
@@ -127,7 +127,10 @@ export default class Shop extends Component {
       <div className="col-sm-6 col-md-3 col">
         <div className="thumbnail">
           <figure className="image one">
-            <a href={'/products/' + product._id}><img src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
+            <a href={'/products/' + product._id}><img style={{
+              width: "100%",
+              height: "200px"
+            }} src={product.image || "/images/product-2.jpg"} className="img-responsive" alt="Responsive image" /></a>
           </figure>
           <div className="caption productdisplay">
             <h3><a href="product_single.html">{product.name}</a></h3>
@@ -176,11 +179,11 @@ export default class Shop extends Component {
                   <div class="filters__column">
 
                     <div class="filters__title">
-                      <h6>Search:</h6>
+
+                      <button onClick={event => this.handleSearch(event)} class="fa fa-search">Search <i> </i></button>
                     </div>
                     <input value={this.state.searchText} onChange={event => this.handleSearchChange(event)}
                       type="text" class="searchinput"></input>
-                    <button onClick={event => this.handleSearch(event)} class="fa fa-search"></button>
                   </div>
                   <div class="filters__column">
 
@@ -215,11 +218,6 @@ export default class Shop extends Component {
               <div className="row" data-aos="fade-up" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
                 {listproducts}
                 {/* col End */}
-              </div>
-
-              <div className="products-display">
-                <a href="#" className="previous">Previous</a>
-                <a href="#" className="next">Next</a>
               </div>
             </div>
             {/* Inner-content End */}

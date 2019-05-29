@@ -25,5 +25,6 @@
 }
 
 .main {
+  padding: 15px;
   margin-left: 160px; /* Same as the width of the sidenav */
 }

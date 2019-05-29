@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const Store = require('../models/store.model');
 const bcrypt = require('bcryptjs');
 import { JWTHelper } from '../helpers';
 
@@ -29,6 +30,11 @@ export default class UserController {
                     error: "Email is wrong"
                 })
             }
+            const userOfStore = user._id;
+            const store = await Store.findOne({
+                belongToUser: userOfStore
+            });
+            console.log(store);
             const isValidPassword = await bcrypt.compareSync(password, user.password);
             if (!isValidPassword) {
                 return res.json({
@@ -39,13 +45,16 @@ export default class UserController {
             // Gen token
             const token = await JWTHelper.sign({
                 id: user._id,
-                username: user.username,
-                email: user.email,
-                role: user.role,
-
+                username: user.username
             });
 
             console.log(token);
+            let storeId
+            if (store) {
+                storeId = store._id;
+            } else {
+                storeId = false;
+            }
             return res.json({
                 success: true,
                 data:
@@ -54,11 +63,9 @@ export default class UserController {
                     id: user._id,
                     email: user.email,
                     username: user.username,
-
-                    role: user.role
+                    role: user.role,
+                    myStore: storeId
                 }
-
-
             });
 
         } catch (e) {
@@ -167,14 +174,7 @@ export default class UserController {
     updateUser = async (req, res, next) => {
         try {
             const user = req.params.id;
-            const { username, address, role, password } = req.body;
-            await User.findOneAndUpdate(
-                user, {
-                    username,
-                    address,
-                    role,
-                    password: await bcrypt.hashSync(password, 10)
-                }, { new: true },
+            await User.findByIdAndUpdate(user, req.body, { new: true },
                 (err, data) => {
                     if (!err) {
                         return res.status(200).json({

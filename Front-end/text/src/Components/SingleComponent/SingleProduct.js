@@ -3,20 +3,24 @@ import { Link } from 'react-router-dom';
 import axiosInstance from '../../helper/AxiosInstance';
 import NavBar from '../Navbar';
 import Footer from '../Footer';
-
 export default class SingleProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: "",
       name: "",
-      comments: [],
+      storeId: "",
+      comments: []
     };
     this.handleSubmitComment = this.handleSubmitComment.bind(this);
     this.handleOrder = this.handleOrder.bind(this);
   }
 
   handleOrder(event) {
+    if (!localStorage.getItem('username')) {
+      alert('Vui Lòng Đăng Nhập Để Xem Chi Tiết Sản Phẩm');
+      return this.props.history.push('/login');
+    }
     axiosInstance
       .post('/orders', {
         userId: localStorage.getItem('userId'),
@@ -120,7 +124,8 @@ export default class SingleProduct extends Component {
                 <div className="row">
                   <div className="col-sm-7 col-md-6">
                     <div className="inner-text">
-                      <h3>{createdAt} Posted by <span>{this.state.name}</span></h3>
+
+                      <h3>{createdAt} Posted by <a href={"/stores/detail/" + this.state.storeId}><span>{this.state.name}</span></a></h3>
                     </div>
                   </div>
                 </div>

@@ -10,7 +10,7 @@ export default class Stores extends Component {
         <div className="banner">
           <div className="container">
             <div>
-              <h1>Our Services</h1>
+              <h1>Bạn có thể tìm các cửa hàng theo mục sau</h1>
             </div>
           </div>
         </div>
@@ -22,12 +22,14 @@ export default class Stores extends Component {
               <div className="part-1">
                 <div className="row" data-aos="fade-up" data-aos-duration={1000}>
                   <div className="col-md-12 heading">
-                    <h3>Pet Grooming</h3>
+                    <a href="/stores/normal"><h3>Cửa Hàng</h3></a>
                   </div>
                   <div className="col-md-3">
-                    <figure>
-                      <img src="images/pete-3.jpg" alt="Web Design" width="100%" />
-                    </figure>
+                    <a href="/stores/normal">
+                      <figure>
+                        <img src="images/pete-3.jpg" alt="Web Design" width="100%" />
+                      </figure>
+                    </a>
                   </div>
                   <div className="col-md-9">
                     <p>Lorem Ipsum is simply dummy text of the printing and typetook a galley of type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum i s type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum is simply dummy text of the printing and specimen book. It has survived not only fiveLorem Ipsum is simply dummy text of the printing and typetook a text of the printing and typetook a galley of type and scrambled it to make a type specimen book.
@@ -38,12 +40,17 @@ export default class Stores extends Component {
               <div className="part-2">
                 <div className="row" data-aos="fade-up" data-aos-duration={1000}>
                   <div className="col-md-12 heading">
-                    <h3>Pet Sitting</h3>
+                    <a href="/stores/beauty">
+                      <h3>Trung Tâm Thẩm Mỹ</h3>
+                    </a>
                   </div>
                   <div className="col-md-3">
-                    <figure>
-                      <img src="images/pete-2.jpg" alt="Web Design" width="100%" />
-                    </figure>
+                    <a href="/stores/beauty">
+                      <figure>
+                        <img src="images/pete-2.jpg" alt="Web Design" width="100%" />
+                      </figure>
+                    </a>
+
                   </div>
                   <div className="col-md-9">
                     <p>Lorem Ipsum is simply dummy text of the printing and typetook a galley of type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum i s type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum is simply dummy text of the printing and specimen book. It has survived not only fiveLorem Ipsum is simply dummy text of the printing and typetook a text of the printing and typetook a galley of type and scrambled it to make a type specimen book.
@@ -54,12 +61,16 @@ export default class Stores extends Component {
               <div className="part-2">
                 <div className="row" data-aos="fade-up" data-aos-duration={1000}>
                   <div className="col-md-12 heading">
-                    <h3>Other Services</h3>
+                    <a href="/stores/training">
+                      <h3>Trung Tâm Huấn Luyện</h3>
+                    </a>
                   </div>
                   <div className="col-md-3">
-                    <figure>
-                      <img src="images/pete-1.jpg" alt="Web Design" width="100%" />
-                    </figure>
+                    <a href="/stores/training">
+                      <figure>
+                        <img src="images/pete-1.jpg" alt="Web Design" width="100%" />
+                      </figure>
+                    </a>
                   </div>
                   <div className="col-md-9">
                     <p>Lorem Ipsum is simply dummy text of the printing and typetook a galley of type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum i s type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum is simply dummy text of the printing and specimen book. It has survived not only fiveLorem Ipsum is simply dummy text of the printing and typetook a text of the printing and typetook a galley of type and scrambled it to make a type specimen book.
@@ -67,6 +78,47 @@ export default class Stores extends Component {
                   </div>
                 </div>
               </div>
+              <div className="part-2">
+                <div className="row" data-aos="fade-up" data-aos-duration={1000}>
+                  <div className="col-md-12 heading">
+                    <a href="/stores/care">
+                      <h3>Trung Tâm Chăm Sóc</h3>
+                    </a>
+                  </div>
+                  <div className="col-md-3">
+                    <a href="/stores/care">
+                      <figure>
+                        <img src="images/pete-1.jpg" alt="Web Design" width="100%" />
+                      </figure>
+                    </a>
+                  </div>
+                  <div className="col-md-9">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typetook a galley of type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum i s type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum is simply dummy text of the printing and specimen book. It has survived not only fiveLorem Ipsum is simply dummy text of the printing and typetook a text of the printing and typetook a galley of type and scrambled it to make a type specimen book.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="part-2">
+                <div className="row" data-aos="fade-up" data-aos-duration={1000}>
+                  <div className="col-md-12 heading">
+                    <a href="/stores/vet">
+                      <h3>Trung Tâm Thú Y</h3>
+                    </a>
+                  </div>
+                  <div className="col-md-3">
+                    <a href="/stores/vet">
+                      <figure>
+                        <img src="images/pete-1.jpg" alt="Web Design" width="100%" />
+                      </figure>
+                    </a>s
+                  </div>
+                  <div className="col-md-9">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typetook a galley of type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum i s type and scrambled it to make a type specimen book. It has survived not only five Lorem Ipsum is simply dummy text of the printing and specimen book. It has survived not only fiveLorem Ipsum is simply dummy text of the printing and typetook a text of the printing and typetook a galley of type and scrambled it to make a type specimen book.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
