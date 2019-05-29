@@ -1,7 +1,8 @@
 const User = require('../models/user.model');
+const Store = require('../models/store.model');
 const bcrypt = require('bcryptjs');
 import { JWTHelper } from '../helpers';
-
+ 
 export default class UserController {
     login = async (req, res, next) => {
         try {
@@ -29,6 +30,11 @@ export default class UserController {
                     error: "Email is wrong"
                 })
             }
+            const userOfStore = user._id;
+            const store = await Store.findOne({
+                belongToUser: userOfStore
+            });
+            console.log(store);
             const isValidPassword = await bcrypt.compareSync(password, user.password);
             if (!isValidPassword) {
                 return res.json({
@@ -39,9 +45,8 @@ export default class UserController {
             // Gen token
             const token = await JWTHelper.sign({
                 id: user._id,
-                username: user.username,
-                email: user.email,
-                role: user.role,
+                username: user.username
+                
 
             });
 
@@ -54,10 +59,9 @@ export default class UserController {
                     id: user._id,
                     email: user.email,
                     username: user.username,
-                    role: user.role
+                    role: user.role,
+                    myStore: store._id,
                 }
-
-
             });
 
         } catch (e) {

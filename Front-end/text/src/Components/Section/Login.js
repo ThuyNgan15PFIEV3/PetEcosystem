@@ -15,7 +15,6 @@ export default class Login extends Component {
 
   handleLogin(event) {
     event.preventDefault();
-    console.log('test');
     const data = new FormData(event.target);
     axiosInstance.post('/user/login', {
       email: data.get('email'),
@@ -28,6 +27,8 @@ export default class Login extends Component {
         localStorage.setItem('token', response.data.data.token);
         localStorage.setItem('username', response.data.data.username);
         localStorage.setItem('role', response.data.data.role);
+        localStorage.setItem('myStore ', response.data.data.myStore);
+
         alert("Login Succesful");
         this.props.history.push('/');
         window.location.reload();
@@ -35,7 +36,6 @@ export default class Login extends Component {
         alert(response.data.error);
       }
     }).catch((error) => {
-      console.log("tets");
       console.log(error);
     })
   }
