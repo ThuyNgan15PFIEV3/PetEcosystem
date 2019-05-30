@@ -44,7 +44,11 @@ export default class AllShop extends Component {
               </a>
             </div>
             <div className="col-md-6">
-              <p>Mô Tả: {store.description}</p>
+              <p style={{
+                overflow: "hidden",
+                height: "100px",
+                textOverflow: "ellipsis",
+              }}>Mô Tả: {store.description}</p>
             </div>
             <div className="col-md-6">
               <p>Địa Chỉ: {store.address}</p>

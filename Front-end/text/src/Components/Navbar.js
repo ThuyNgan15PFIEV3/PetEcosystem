@@ -24,15 +24,15 @@ export default class Navbar extends Component {
     let logout;
     let username;
     if (isLoggedIn) {
-      username = localStorage.getItem('username');
+      username = 'Chào ' + localStorage.getItem('username');
       order = <li><a title="Bạn có thể kiểm tra đơn đặt hàng ở đây" href="/order">
         <i className="fa fa-cart-arrow-down" aria-hidden="true" />
       </a>
       </li>
-      logout = <li><a href="/login" onClick={(event) => (this.handleLogout(event))}>Log out</a></li>
+      logout = <li><a href="/login" onClick={(event) => (this.handleLogout(event))}>Thoát</a></li>
     }
     else {
-      logout = <li><a href="/login" >Log in</a></li>
+      logout = <li><a href="/login" >Đăng nhập</a></li>
     }
     let adminpage;
     const isAdmin = localStorage.getItem('role') === 'admin';
@@ -62,14 +62,14 @@ export default class Navbar extends Component {
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav navbar-right">
                   <li>
-                    <p >Xin Chào {username}</p>
+                    <p > {username}</p>
                   </li>
                   <li><a href="/"><i className="fa fa-home" aria-hidden="true" /> <span className="sr-only">(current)</span></a></li>
                   {adminpage}
-                  <li><a title="Xem thông tin các sản phẩm mới tại đây" href="/shop">Shop </a></li>
-                  <li><a title="Xem thông tin các cửa hàng tại đây" href="/stores">stores </a></li>
-                  <li><a title="Xem các bài viết hữu ích tại đây" href="/blog">Blog </a></li>
-                  <li><a title="Quản lý cửa hàng của bạn tại đây" href="/mystore">My Store </a></li>
+                  <li><a title="Xem thông tin các sản phẩm mới tại đây" href="/shop">Sản phẩm </a></li>
+                  <li><a title="Xem thông tin các cửa hàng tại đây" href="/stores">Cửa hàng </a></li>
+                  <li><a title="Xem các bài viết hữu ích tại đây" href="/blog">Cộng đồng </a></li>
+                  <li><a title="Quản lý cửa hàng của bạn tại đây" href="/mystore">My store </a></li>
                   {logout}
                   {order}
 

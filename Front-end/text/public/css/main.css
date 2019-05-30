@@ -446,8 +446,7 @@ a:active {text-decoration: none;}
     text-align:left;
     color:#fff !important;
     z-index:2;
-    opacity: 0;
-    visibility: hidden;
+    visibility: visible;
   -webkit-transition:opacity 0.5s linear;
   -moz-transition:opacity 0.5s linear;
   -o-transition:opacity 0.5s linear;

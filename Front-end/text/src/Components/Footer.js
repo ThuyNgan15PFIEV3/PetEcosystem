@@ -10,7 +10,7 @@ export default class Footer extends Component {
             <div className="row">
               <div className="inner-content">
                 <div className="col-sm-6" data-aos="fade-right" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
-                  <h2 className="left">Contact us for support</h2>
+                  <h2 className="left">Liên hệ chúng tôi để cùng phát triển</h2>
                   <form>
                     <div className="row">
                       <div className="col-sm-6 form-group">
@@ -23,20 +23,23 @@ export default class Footer extends Component {
                     <textarea className="form-control" name="comments" placeholder="Comment" rows={8} defaultValue={""} /><br />
                     <div className="row">
                       <div className="col-sm-12 form-group">
-                        <button className="btn btn-default pull-left" type="submit">Get In Touch</button>
+                        <button className="btn btn-default pull-left" type="submit">Xác nhận</button>
                       </div>
                     </div>
                   </form>
                 </div>
                 <div className="col-sm-5 address" data-aos="fade-left" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
-                  <h2>Our Office Address</h2>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five </p>
-                  <ul className="social-icon">
+                  <h2>Thông tin của chúng tôi</h2>
+                  <p>Thành lập năm 2019</p>
+                  <p>Địa chỉ: 45 Nguyễn Lương Bằng, Đà Nẵng, Việt Nam</p>
+                  <p>Đia chỉ email: thucunglove@gmail.com</p>
+                  <p>Số điện thoại: 0999999999</p>
+                  {/* <ul className="social-icon">
                     <li><a href="#"><i className="fa fa-facebook-square" aria-hidden="true" /></a></li>
                     <li><a href="#"><i className="fa fa-twitter-square" aria-hidden="true" /></a></li>
                     <li><a href="#"><i className="fa fa-youtube-square" aria-hidden="true" /></a></li>
                     <li><a href="#"><i className="fa fa-pinterest-square" aria-hidden="true" /></a></li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>
@@ -49,24 +52,7 @@ export default class Footer extends Component {
                   <p><a className="footer-logo" href="index.html">pet<span>z</span></a></p>
                 </div>
                 <div className="col-sm-9">
-                  <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a className="hidden-xs" href="#">|</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a className="hidden-xs" href="#">|</a></li>
-                    <li><a href="products.html">Product</a></li>
-                    <li><a className="hidden-xs" href="#">|</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a className="hidden-xs" href="#">|</a></li>
-                    <li><a href="shop.html">shop</a></li>
-                    <li><a className="hidden-xs" href="#">|</a></li>
-                    <li><a href="blog.html">blog</a></li>
-                    <li><a className="hidden-xs" href="#">|</a></li>
-                    <li><a href="careers.html">careers</a></li>
-                    <li><a className="hidden-xs" href="#">|</a></li>
-                    <li><a href="#contact">contact</a></li>
-                  </ul>
-                  <p>(C) 2017, All Rights Reserved <span><a href="https://www.template.net/editable/websites/html5" target="_blank">Petz Theme</a></span>, Designed by <span><a href="https://www.template.net/editable/websites/html5" target="_blank">Template.net</a></span></p>
+                  <p>(C) 2019, Thực hiển bởi cộng nhóm yêu thú cưng</p>
                 </div>
               </div>
             </div>

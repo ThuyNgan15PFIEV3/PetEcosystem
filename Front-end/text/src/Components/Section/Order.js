@@ -60,8 +60,8 @@ export default class SingleBlog extends Component {
                 <br />
                 <br />
                 <br />
-                <h4>Your shopping cart contains:
-                <span>{this.state.data.length} Products</span>
+                <h4>Bạn có 
+                <span> {this.state.data.length} đơn hàng</span>
                 </h4>
                 <br />
                 <table className="timetable_sub table-responsive">

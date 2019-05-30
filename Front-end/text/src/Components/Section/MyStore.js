@@ -11,6 +11,13 @@ export default class SingleStore extends Component {
   }
 
   componentDidMount() {
+
+    if (!localStorage.getItem('token')) {
+      alert('Bạn vui lòng đăng nhập để sử dụng tính năng này');
+      this.props.history.push('/login');
+      window.location.reload();
+      return
+    }
     console.log('test');
     var haveStore = localStorage.getItem('myStore');
 

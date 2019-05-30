@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
       data: order
     });
   } catch (err) {
-    return res.status(500).send({
+    return res.send({
       message:
         err.message || "Some error occurred while creating the Order."
     });

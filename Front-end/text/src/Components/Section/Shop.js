@@ -24,7 +24,12 @@ export default class Shop extends Component {
         products: temp
       })
     } else {
-      var searchProducts = temp.filter(product => product.category === value)
+      var searchProducts = temp.filter(product => {
+        if (typeof product.category !== 'undefined' && product.category !== null) {
+          return product.category._id === value
+        }
+        return false
+      })
       this.setState({
         products: searchProducts
       })
@@ -212,11 +217,7 @@ export default class Shop extends Component {
                 </div>
 
               </div>
-              <br />
-              <br />
-              <br />
-              <br />
-              <h2 style={{ paddingTop: '40px' }}>Latest Products</h2>
+              <h2>Các Sản Phẩm Mới Nhất</h2>
               <div className="row" data-aos="fade-up" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
                 {listproducts}
                 {/* col End */}

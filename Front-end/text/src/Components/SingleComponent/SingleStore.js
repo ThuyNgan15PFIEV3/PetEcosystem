@@ -85,7 +85,7 @@ export default class SingleStore extends Component {
     let checkOrder
     if (this.props.match.params.storeId === myStore) {
       checkOrder = (
-        <a href="/addBlog">
+        <a href="/checkorder">
           <button style={{
             position: "absolute",
             width: "25%",
@@ -228,7 +228,7 @@ export default class SingleStore extends Component {
             <section id="product">
               <div className="container">
                 <div className="inner-content">
-                  <h2 style={{ paddingTop: '40px' }}>Latest Products</h2>
+                  <h2 style={{ paddingTop: '40px' }}>Các Sản Phẩm Mới Nhất</h2>
                   <div className="row" data-aos="fade-up" data-aos-offset={300} data-aos-easing="ease-in-sine" data-aos-duration={500}>
                     {addProduct}
                     {listProducts}

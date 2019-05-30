@@ -116,7 +116,7 @@ class RemoteAlternative extends React.Component {
     return remoteObj;
   }
   usernameFormatter(cell, row) {
-    if (typeof cell !== 'undefined')
+    if (typeof cell !== 'undefined' && cell !== null)
       return cell.username;
     else return
   }

@@ -39,12 +39,11 @@ export default class AdminProducts extends Component {
     this.setState({
       data: this.state.data
     });
-    console.log(row['typeOfStore']);
-    axiosInstance.put('/stores/detail/' + row['_id'], {
+    axiosInstance.put('/products/' + row['_id'], {
       name: row['name'],
       description: row['description'],
-      address: row['address'],
-      typeOfStore: row['typeOfStore']
+      price: row['price'],
+      image: row['image']
     }).then(res => {
       console.log('thanh cong');
     }).catch(err => {
@@ -116,6 +115,12 @@ class RemoteAlternative extends React.Component {
     return remoteObj;
   }
 
+  categoryNameFormatter(cell, row) {
+    if (typeof cell !== 'undefined' && cell !== null)
+      return cell.name;
+    else return
+  }
+
   render() {
     const cellEditProp = {
       mode: 'click'
@@ -141,7 +146,8 @@ class RemoteAlternative extends React.Component {
         <TableHeaderColumn dataField='name'>Products Name</TableHeaderColumn>
         <TableHeaderColumn dataField='description'>Description</TableHeaderColumn>
         <TableHeaderColumn dataField='price'>Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='image' hiddenOnInsert editable={{ type: "textarea", readOnly: true }} >Image</TableHeaderColumn>
+        <TableHeaderColumn dataField='image'  >Image</TableHeaderColumn>
+        <TableHeaderColumn dataField='category' hiddenOnInsert dataFormat={this.categoryNameFormatter} >Category</TableHeaderColumn>
       </BootstrapTable>
     );
   }
