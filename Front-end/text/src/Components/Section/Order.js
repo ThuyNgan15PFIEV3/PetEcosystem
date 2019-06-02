@@ -11,6 +11,22 @@ export default class SingleBlog extends Component {
     };
   }
 
+  handleDestroy(id, event) {
+    console.log(id)
+    axiosInstance.put('/orders/' + id, {
+      state: "destroy"
+    })
+      .then((response) => {
+        alert('Bạn đã hủy đơn hàng thành công');
+        this.componentDidMount();
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+
   componentDidMount() {
     axiosInstance
       .get('/orders/detail/' + localStorage.getItem('userId'))
@@ -28,18 +44,26 @@ export default class SingleBlog extends Component {
   }
 
   render() {
-    var listOrders = this.state.data.map(order => (
-      <tr>
-        <td className="invert">{order.productId.name}</td>
-        <td className="invert-image">
-          <a href={'/products/' + order.productId._id}><img src={order.productId.image || "/images/product-2.jpg"} alt="Responsive image" /></a>
-        </td>
-        <td className="invert">{order.storeId.name}</td>
-        <td className="invert">{order.productId.price}</td>
-        <td className="invert">{order.state}</td>
-      </tr>
+    var listOrders = this.state.data.map(order => {
+      let destroy
+      if (order.state === "wait") {
+        destroy = <button onClick={event => this.handleDestroy(order._id, event)}>
+          Có thể hủy đơn hàng
+        </button>
+      }
+      return (
+        <tr>
+          <td className="invert">{order.productId.name}</td>
+          <td className="invert-image">
+            <a href={'/products/' + order.productId._id}><img src={order.productId.image || "/images/product-2.jpg"} alt="Responsive image" /></a>
+          </td>
+          <td className="invert">{order.storeId.name}</td>
+          <td className="invert">{order.productId.price}</td>
+          <td className="invert">{order.state} {destroy}</td>
+        </tr>
 
-    ));
+      )
+    });
     return (
       <div>
         <NavBar />
@@ -60,7 +84,7 @@ export default class SingleBlog extends Component {
                 <br />
                 <br />
                 <br />
-                <h4>Bạn có 
+                <h4>Bạn có
                 <span> {this.state.data.length} đơn hàng</span>
                 </h4>
                 <br />

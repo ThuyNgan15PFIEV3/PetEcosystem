@@ -46,14 +46,27 @@ export default class CheckOrder extends Component {
     var listOrders = this.state.data.map(order => {
       let username
       let address
-      if(order.userId) {
+      let destroy
+      if (order.userId) {
         username = order.userId.username;
         address = order.userId.address;
       } else {
-        username= 'Anonymous';
-        address= 'No where';
+        username = 'Anonymous';
+        address = 'No where';
       }
-      return(
+
+      if (order.state === "destroy") {
+        destroy = order.state
+      } else {
+        destroy = <select value={order.state} name="state" onChange={event => this.handleChange(order._id, event)}>
+          <option value="wait">Đang xử lý</option>
+          <option value="process">Đang gửi hàng</option>
+          <option value="destroy">Hủy đơn hàng</option>
+          <option value="complete">Hoàn thành đơn hàng</option>
+        </select>
+      }
+      return (
+
         <tr>
           <td className="invert">{order.productId.name}</td>
           <td className="invert-image">
@@ -62,12 +75,7 @@ export default class CheckOrder extends Component {
           <td className="invert">{username}</td>
           <td className="invert">{address}</td>
           <td className="invert">
-            <select value={order.state} name="state" onChange={event => this.handleChange(order._id, event)}>
-              <option value="wait">Đang xử lý</option>
-              <option value="process">Đang gửi hàng</option>
-              <option value="destroy">Hủy đơn hàng</option>
-              <option value="complete">Hoàn thành đơn hàng</option>
-            </select>
+            {destroy}
           </td>
         </tr>
 
